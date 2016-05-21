@@ -162,7 +162,7 @@
       </span>
     </a>
   </div>
-  <p class="site-subtitle">小王终于有个独立的地方了。</p>
+  <p class="site-subtitle">蒹葭苍苍忆佳人</p>
 </div>
 
 <div class="site-nav-toggle">
@@ -231,6 +231,28 @@
         <br />
         
         标签
+      </a>
+    </li>
+    
+        
+    <li class="menu-item menu-item-guitar">
+      <a href="/guitar" rel="section">
+        
+        <i class="menu-item-icon fa fa-music fa-fw"></i>
+        <br />
+        
+        吉他
+      </a>
+    </li>
+    
+        
+    <li class="menu-item menu-item-message">
+      <a href="/MessageBoard" rel="section">
+        
+        <i class="menu-item-icon fa fa-comments fa-fw"></i>
+        <br />
+        
+        留言板
       </a>
     </li>
     
@@ -324,7 +346,7 @@
       <nav class="site-state motion-element">
         <div class="site-state-item site-state-posts">
           <a href="/archives">
-            <span class="site-state-item-count">2</span>
+            <span class="site-state-item-count">4</span>
             <span class="site-state-item-name">日志</span>
           </a>
         </div>
@@ -333,7 +355,7 @@
           
           <a href="/categories">
             
-            <span class="site-state-item-count">1</span>
+            <span class="site-state-item-count">2</span>
             <span class="site-state-item-name">分类</span>
             
           </a>
@@ -346,7 +368,7 @@
           
           <a href="/tags">
             
-            <span class="site-state-item-count">4</span>
+            <span class="site-state-item-count">7</span>
             <span class="site-state-item-name">标签</span>
             
           </a>
@@ -405,7 +427,9 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright" >
+        <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+<div class="copyright" >
   
   &copy; 
   <span itemprop="copyrightYear">2016</span>
@@ -414,7 +438,12 @@
   </span>
   <span class="author" itemprop="copyrightHolder">王小王sean</span>
 </div>
-
+<span id="busuanzi_container_site_pv">
+    本站总访问量<span id="busuanzi_value_site_pv"></span>次
+</span>
+<span id="busuanzi_container_site_uv">
+  本站访客数<span id="busuanzi_value_site_uv"></span>人次
+</span>
 <div class="powered-by">
   由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
 </div>
@@ -540,6 +569,99 @@
   
 
   
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("Ypm2bpziM6K8MQzeCOwOIsh5-gzGzoHsz", "C2onfFr7kBaAxb3SYKJsww8P");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
 
   
 <script type="text/javascript" async src="//push.zhanzhang.baidu.com/push.js">
