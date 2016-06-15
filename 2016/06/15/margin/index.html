@@ -64,7 +64,7 @@
 <link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="生活,感想,未来," />
+  <meta name="keywords" content="css," />
 
 
 
@@ -80,16 +80,33 @@
 
 
 
-<meta name="description" content="一直以来，觉得自己聪明，又不聪明，但总会用些小聪明来让别人觉得自己聪明。与其说这与自己本身聪不聪明有无关系，还不如讲怎么样才能够得到别人认可。">
+<meta name="description" content="近日，在练习切图做html的时候，遇到了这样一个问题：
+
+两个盒子相邻，下面的盒子的子元素有个margin-top，然后显示的时候，下面的盒子也跟着跑下来，好像父元素，也有同样的margin-top
+
+一番寻找答案，最后将其原因还是归类到盒子模型的margin 折叠条件：（w3c规定的，所以是准则。）">
 <meta property="og:type" content="article">
-<meta property="og:title" content="社会需要怎样的人？">
-<meta property="og:url" content="http://wangshiping.net/2016/05/13/think/index.html">
+<meta property="og:title" content="为何子元素的margin-top会出传递到父元素？">
+<meta property="og:url" content="http://wangshiping.net/2016/06/15/margin/index.html">
 <meta property="og:site_name" content="王小王的小站">
-<meta property="og:description" content="一直以来，觉得自己聪明，又不聪明，但总会用些小聪明来让别人觉得自己聪明。与其说这与自己本身聪不聪明有无关系，还不如讲怎么样才能够得到别人认可。">
-<meta property="og:updated_time" content="2016-05-21T10:52:39.677Z">
+<meta property="og:description" content="近日，在练习切图做html的时候，遇到了这样一个问题：
+
+两个盒子相邻，下面的盒子的子元素有个margin-top，然后显示的时候，下面的盒子也跟着跑下来，好像父元素，也有同样的margin-top
+
+一番寻找答案，最后将其原因还是归类到盒子模型的margin 折叠条件：（w3c规定的，所以是准则。）">
+<meta property="og:image" content="http://o6k660ytf.bkt.clouddn.com//margin/margin1.png">
+<meta property="og:image" content="http://o6k660ytf.bkt.clouddn.com//margin/margin1.png">
+<meta property="og:image" content="http://o6k660ytf.bkt.clouddn.com//margin/margin2.png">
+<meta property="og:image" content="http://o6k660ytf.bkt.clouddn.com//margin/margin3.png">
+<meta property="og:updated_time" content="2016-06-15T17:23:53.324Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="社会需要怎样的人？">
-<meta name="twitter:description" content="一直以来，觉得自己聪明，又不聪明，但总会用些小聪明来让别人觉得自己聪明。与其说这与自己本身聪不聪明有无关系，还不如讲怎么样才能够得到别人认可。">
+<meta name="twitter:title" content="为何子元素的margin-top会出传递到父元素？">
+<meta name="twitter:description" content="近日，在练习切图做html的时候，遇到了这样一个问题：
+
+两个盒子相邻，下面的盒子的子元素有个margin-top，然后显示的时候，下面的盒子也跟着跑下来，好像父元素，也有同样的margin-top
+
+一番寻找答案，最后将其原因还是归类到盒子模型的margin 折叠条件：（w3c规定的，所以是准则。）">
+<meta name="twitter:image" content="http://o6k660ytf.bkt.clouddn.com//margin/margin1.png">
 
 
 
@@ -107,7 +124,7 @@
   };
 </script>
 
-  <title> 社会需要怎样的人？ | 王小王的小站 </title>
+  <title> 为何子元素的margin-top会出传递到父元素？ | 王小王的小站 </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -293,7 +310,7 @@
             
             
               
-                社会需要怎样的人？
+                为何子元素的margin-top会出传递到父元素？
               
             
           </h1>
@@ -305,8 +322,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-05-13T23:11:43+08:00" content="2016-05-13">
-              2016-05-13
+            <time itemprop="dateCreated" datetime="2016-06-15T23:46:10+08:00" content="2016-06-15">
+              2016-06-15
             </time>
           </span>
 
@@ -319,8 +336,8 @@
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/生活/" itemprop="url" rel="index">
-                    <span itemprop="name">生活</span>
+                  <a href="/categories/技术/" itemprop="url" rel="index">
+                    <span itemprop="name">技术</span>
                   </a>
                 </span>
 
@@ -335,8 +352,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2016/05/13/think/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/05/13/think/" itemprop="commentsCount"></span>
+                <a href="/2016/06/15/margin/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/06/15/margin/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -344,7 +361,7 @@
           <!-- 统计阅读量代码 -->
         <!--   
           &nbsp; | &nbsp;
-          <span id="/2016/05/13/think/"class="leancloud_visitors" data-flag-title="社会需要怎样的人？">
+          <span id="/2016/06/15/margin/"class="leancloud_visitors" data-flag-title="为何子元素的margin-top会出传递到父元素？">
             &nbsp;阅读次数
           </span>
            -->
@@ -352,7 +369,7 @@
 
           
           
-             <span id="/2016/05/13/think/" class="leancloud_visitors" data-flag-title="社会需要怎样的人？">
+             <span id="/2016/06/15/margin/" class="leancloud_visitors" data-flag-title="为何子元素的margin-top会出传递到父元素？">
                &nbsp; | &nbsp;
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -374,18 +391,83 @@
       
 
       
-        <p>一直以来，觉得自己聪明，又不聪明，但总会用些小聪明来让别人觉得自己聪明。与其说这与自己本身聪不聪明有无关系，还不如讲怎么样才能够得到别人认可。<a id="more"></a><br>从小到大，我们是接受应试教育长大的，评判你是否优秀的唯一标准就是，你的成绩是否好，考试是否得了好的名次。这样的环境中，我如鱼得水，就算偶尔成绩不好，但那并不代表我不 “聪明”，只是我贪玩罢了~印象中有三次，我觉得还算深刻的事：</p>
+        <p>近日，在练习切图做html的时候，遇到了这样一个问题：</p>
 <blockquote>
-<p>小学5年级开始，学校引入了英语教育，开始学单词，考试。是的，我贪玩，不喜欢。有一次考试，居然和一个同学并列的得了最后一名，老师很严厉，惩罚我们出去教师外面反思，我依然记得当时教室门外的情景，漫天大雪，狂风乱舞，我懂得两手发红，拿着卷子上满处的红叉，咬着牙，狠狠的发誓，英语，不就是英语，我一定要学好！然后过了一年。毕业考试，英语考试，我拿了班里唯一的满分，老师念着分数给同学们卷子的时候，我第一个走上讲台，拿着卷子轻蔑的望着老师，心里叫着，“老子不是那么好惹的！”</p>
-<p>高中有次物理考试，题目非常简单，同学们都考得比较好，唯独我不知什么原因，考得特别菜，当时觉得很丢脸。然后我决定要雪耻，接下来的几个月里，我发奋研究题目，跟班里非常牛的童鞋讨论题目。然后，又一次考试，物理题目比较难，班上一共三个物理上90分以上的童鞋，我拿了物理第一名，91分，另外两个人都是90分（其中一个人上了清华），物理老师都很震惊，我这个平日里吊儿郎当，他不放在眼里的小调皮，居然也是匹小黑马，同学们争相去传阅我的卷子的时候，当时觉得“荣耀无比”！</p>
-<p>大学，这次是参加一个计算机的编程比赛，参加这个不为别的，只是听说进了决赛，就可以去北京参加全国总决赛了。就因为没有去北京游玩的车费，想进决赛，公款去北京玩。是的，当时说这个想法给同宿舍的人听，一阵嘘声，别做梦了，别浪费报名费了（200报名费），我就是不信邪，好，我跟宿舍一小子打赌，若我进决赛了，报名费他出。接下来，我又发狂了，就那么突击准备了两周，就去参加比赛了。当成绩下来时，连我自己都不相信我以全省第9名的成绩进入了在北京大学的全国决赛（省一等奖才可全国决赛）。我大笑着调侃着宿舍的小子，“看，跟哥赌，你肯定输”。</p>
+<p>两个盒子相邻，下面的盒子的子元素有个margin-top，然后显示的时候，下面的盒子也跟着跑下来，好像父元素，也有同样的margin-top</p>
 </blockquote>
-<p>三个故事讲完，就进入了社会，社会没有考试，只有考核，考核不是考试，却反映着你的劳动成果，考核不会因为你的一次贡献而变得好，而只会有一个影响。是的。习惯了应试教育的我，拿着之前的模式，在我想做的时候，急功近利的去搞，发现这招已经失效，再也不灵了。于是我有了以下感悟：</p>
+<p>一番寻找答案，最后将其原因还是归类到盒子模型的margin 折叠条件：（w3c规定的，所以是准则。）<br><a id="more"></a></p>
+<ul>
+<li>这些margin都处于普通流（非float和绝对定位）中，并在同一个BFC中；</li>
+<li>这些margin没有被非空内容、padding、border 或 clear 分隔开；</li>
+<li>这些margin在垂直方向上是毗邻的，包括以下几种情况：<ul>
+<li>一个box的top margin与第一个子box的top margin</li>
+<li>一个box的bottom margin与最后一个子box的bottom margin，但须在该box的height 为auto的情况下</li>
+<li>一个box的bottom margin与紧接着的下一个box的top margin</li>
+<li>一个box的top margin与其自身的bottom margin，但须满足没创建BFC、零min-height、零或者“auto”的height、没有普通流的子box</li>
+</ul>
+</li>
+</ul>
+<p>这些条件，最后也就可翻译成以下规则：</p>
+<ul>
+<li>创建了新的BFC的元素（例如浮动元素或者’overflow’值为’visible’以外的元素）与它的子元素的外边距不会折叠</li>
+<li>浮动元素不与任何元素的外边距产生折叠（包括其父元素和子元素）</li>
+<li>绝对定位元素不与任何元素的外边距产生折叠</li>
+<li>inline-block元素不与任何元素的外边距产生折叠</li>
+<li>一个常规文档流元素的margin-bottom与它下一个常规文档流的兄弟元素的margin-top会产生折叠，除非它们之间存在间隙（clearance）。</li>
+<li>一个常规文档流元素的margin-top 与其第一个常规文档流的子元素的margin-top产生折叠，条件为父元素不包含 padding 和 border ，子元素不包含 clearance。</li>
+<li>一个 ‘height’ 为 ‘auto’ 并且 ‘min-height’ 为 ‘0’的常规文档流元素的 margin-bottom 会与其最后一个常规文档流子元素的 margin-bottom 折叠，条件为父元素不包含 padding 和 border ，子元素的 margin-bottom 不与包含 clearance 的 margin-top 折叠。</li>
+<li>一个不包含border-top、border-bottom、padding-top、padding-bottom的常规文档流元素，并且其 ‘height’ 为 0 或 ‘auto’， ‘min-height’ 为 ‘0’，其里面也不包含行盒(line box)，其自身的 margin-top 和 margin-bottom 会折叠。 </li>
+</ul>
+<p>下面对这些规则中的几个进行做个对比演示：</p>
+<ul>
+<li><p>父元素折叠子元素的margin-top</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">div</span>&#123;<span class="attribute">width</span>:<span class="number">200px</span>;&#125;</span><br><span class="line">    <span class="selector-class">.topbox</span>&#123;<span class="attribute">background-color</span>:red;   <span class="attribute">height</span>: <span class="number">100px</span>;&#125;</span><br><span class="line">    <span class="selector-class">.bottombox</span>&#123; <span class="attribute">background-color</span>: green; <span class="attribute">height</span>: <span class="number">100px</span>; &#125;</span><br><span class="line">    <span class="selector-class">.innerbox</span>&#123;  <span class="attribute">margin-top</span>: <span class="number">10px</span>;   <span class="attribute">background-color</span>: <span class="number">#3c3c3c</span>;  <span class="attribute">height</span>: <span class="number">50px</span>;   &#125;</span><br><span class="line">    <span class="selector-class">.innerbox2</span>&#123; <span class="attribute">margin-top</span>: <span class="number">10px</span>;   <span class="attribute">background-color</span>: <span class="number">#3c3c3c</span>;  <span class="attribute">height</span>: <span class="number">50px</span>;   <span class="attribute">display</span>:inline-block;&#125;</span><br><span class="line">    <span class="selector-class">.bottombox2</span>&#123;<span class="attribute">background-color</span>: green; <span class="attribute">height</span>: <span class="number">100px</span>; <span class="attribute">margin-top</span>: <span class="number">5px</span>; &#125;</span><br><span class="line">    <span class="selector-class">.bottombox3</span>&#123;<span class="attribute">background-color</span>: green; <span class="attribute">height</span>: <span class="number">100px</span>; <span class="attribute">margin-top</span>: <span class="number">5px</span>;<span class="attribute">border</span>: <span class="number">1px</span> solid <span class="number">#000000</span>;  &#125;</span><br><span class="line">  </span><br></pre></td></tr></table></figure>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;div class="topbox"&gt;</span><br><span class="line">&lt;/div&gt;</span><br><span class="line">&lt;div class="bottombox"&gt;</span><br><span class="line">&lt;div class="innerbox"&gt;</span><br><span class="line"> &lt;/div&gt;</span><br><span class="line"> &lt;/div&gt;</span><br><span class="line"> </span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p><strong>浏览器显示</strong></p>
+<img src="http://o6k660ytf.bkt.clouddn.com//margin/margin1.png">
 <blockquote>
-<p>社会不是考试，不会因为某一次考试考得好，就判断你是否优秀，社会的考核是一个长期且多维的判断过程。<br>社会需要的是脚踏实地的成长，凡是虚无的东西，如果你不幸运，戳破了终究会有自己来补，而这个过程，你积累的越多，成长的也越快。<br>社会很复杂，一切以利益挂钩，你的“分数”已经不值钱了，你的价值在于你能够产生多少价值。</p>
+<p>可以看到，bottombox 直接“借用”了 indderbox 的margin-top 向下移动了10像素</p>
 </blockquote>
-<p>社会需要怎样的人？虽然还是不很清楚，但慢慢的却懂得了，社会不需要什么样的人，慢慢改变，会越来越好的！</p>
-
+<ul>
+<li><p>父元素会取子元素两者之间的较大者作为父元素的margin-top：</p>
+  <figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;div class="topbox"&gt;</span><br><span class="line"> &lt;/div&gt;</span><br><span class="line"> &lt;div class="bottombox2"&gt;</span><br><span class="line"> &lt;div class="innerbox"&gt;</span><br><span class="line"> &lt;/div&gt;</span><br><span class="line"> &lt;/div&gt;            </span><br><span class="line">    </span><br></pre></td></tr></table></figure>
+<p>  <strong>浏览器显示</strong></p>
+  <img src="http://o6k660ytf.bkt.clouddn.com//margin/margin1.png">
+<blockquote>
+<p>可以看到，父元素margin-top 5px,子元素margin-top 10px,浏览器显示与之前一样</p>
+</blockquote>
+</li>
+<li><p>元素设置为浮动，或display 为inline-block 时，不会折叠子元素的margin</p>
+<pre><code>&lt;div class=&quot;topbox&quot;&gt;
+&lt;/div&gt;
+&lt;div class=&quot;bottombox2&quot;&gt;
+    &lt;div class=&quot;innerbox2&quot;&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+</code></pre><p>  <strong>浏览器显示</strong></p>
+  <img src="http://o6k660ytf.bkt.clouddn.com//margin/margin2.png">
+<blockquote>
+<p>父元素没有折叠子元素的margin-top ，用了自己定义的 5px,而子元素基于父元素再计算margn-top,将innerbox2 的float设置为left,可以得到相同的显示效果。</p>
+</blockquote>
+</li>
+<li><p>将bottombox 加上border后：</p>
+<pre><code>&lt;div class=&quot;topbox&quot;&gt;
+&lt;/div&gt;
+&lt;div class=&quot;bottombox2&quot;&gt;
+    &lt;div class=&quot;innerbox2&quot;&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+</code></pre><p>  <strong>浏览器显示</strong></p>
+  <img src="http://o6k660ytf.bkt.clouddn.com//margin/margin3.png">
+<blockquote>
+<p>可以看到bottombox 加上了border之后，也没有对子元素margin-top进行折叠。</p>
+</blockquote>
+</li>
+</ul>
+<p>三个简简单的列子，展示了margin-top的效果，更多盒子折叠的内容参考w3c中的这篇文章：</p>
+<blockquote><footer><strong>深入理解BFC和Margin Collapse</strong><cite><a href="http://www.w3cplus.com/css/understanding-bfc-and-margin-collapse.html" target="_blank" rel="external">www.w3cplus.com/css/understanding-bfc-and-margin-collapse.html</a></cite></footer></blockquote>
       
     </div>
     
@@ -426,11 +508,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/生活/" rel="tag">#生活</a>
-          
-            <a href="/tags/感想/" rel="tag">#感想</a>
-          
-            <a href="/tags/未来/" rel="tag">#未来</a>
+            <a href="/tags/css/" rel="tag">#css</a>
           
         </div>
       
@@ -439,17 +517,13 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/05/08/近日/" rel="next" title="最近的生活">
-                <i class="fa fa-chevron-left"></i> 最近的生活
+              <a href="/2016/06/06/howtolife/" rel="next" title="生活应该怎么过">
+                <i class="fa fa-chevron-left"></i> 生活应该怎么过
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/05/17/choose/" rel="prev" title="关于选择">
-                关于选择 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -475,8 +549,8 @@
           
 <div class="comments" id="comments">
   
-  <div class="ds-thread" data-thread-key="2016/05/13/think/"
-           data-title="社会需要怎样的人？" data-url="http://wangshiping.net/2016/05/13/think/"></div>
+  <div class="ds-thread" data-thread-key="2016/06/15/margin/"
+           data-title="为何子元素的margin-top会出传递到父元素？" data-url="http://wangshiping.net/2016/06/15/margin/"></div>
 
   <!-- 多说评论框 end -->
   <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
