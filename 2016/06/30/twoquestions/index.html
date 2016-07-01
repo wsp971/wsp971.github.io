@@ -80,14 +80,14 @@
 
 
 
-<meta name="description" content="今天解决了两个难啃的问题，最后终于也解决了，在此记录一下：
+<meta name="description" content="今天遇到了两个问题，最后终于也解决了。在此记录一下：
 
 自己的windows笔记本在公司上不了网，公司只允许用mac笔记本或者手机来上公共wifi,故思来想去，只能用修改ua 来伪装手机来上网，重要的是我以后可以背着自己的本本来公司上班了。之前，只能离线玩。没网什么都干不了。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="两个问题">
 <meta property="og:url" content="http://wangshiping.net/2016/06/30/twoquestions/index.html">
 <meta property="og:site_name" content="王小王的小站">
-<meta property="og:description" content="今天解决了两个难啃的问题，最后终于也解决了，在此记录一下：
+<meta property="og:description" content="今天遇到了两个问题，最后终于也解决了。在此记录一下：
 
 自己的windows笔记本在公司上不了网，公司只允许用mac笔记本或者手机来上公共wifi,故思来想去，只能用修改ua 来伪装手机来上网，重要的是我以后可以背着自己的本本来公司上班了。之前，只能离线玩。没网什么都干不了。">
 <meta property="og:image" content="http://o6k660ytf.bkt.clouddn.com//myimage/nuomi.png">
@@ -95,10 +95,10 @@
 <meta property="og:image" content="http://o6k660ytf.bkt.clouddn.com//myimage/A.png">
 <meta property="og:image" content="http://o6k660ytf.bkt.clouddn.com//myimage/2.png">
 <meta property="og:image" content="http://o6k660ytf.bkt.clouddn.com//myimage/3.png">
-<meta property="og:updated_time" content="2016-06-30T11:57:05.443Z">
+<meta property="og:updated_time" content="2016-07-01T01:16:11.241Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="两个问题">
-<meta name="twitter:description" content="今天解决了两个难啃的问题，最后终于也解决了，在此记录一下：
+<meta name="twitter:description" content="今天遇到了两个问题，最后终于也解决了。在此记录一下：
 
 自己的windows笔记本在公司上不了网，公司只允许用mac笔记本或者手机来上公共wifi,故思来想去，只能用修改ua 来伪装手机来上网，重要的是我以后可以背着自己的本本来公司上班了。之前，只能离线玩。没网什么都干不了。">
 <meta name="twitter:image" content="http://o6k660ytf.bkt.clouddn.com//myimage/nuomi.png">
@@ -386,14 +386,20 @@
       
 
       
-        <p>今天解决了两个难啃的问题，最后终于也解决了，在此记录一下：</p>
+        <p>今天遇到了两个问题，最后终于也解决了。在此记录一下：</p>
 <ul>
 <li>自己的windows笔记本在公司上不了网，公司只允许用mac笔记本或者手机来上公共wifi,故思来想去，只能用修改ua 来伪装手机来上网，重要的是我以后可以背着自己的本本来公司上班了。之前，只能离线玩。没网什么都干不了。<a id="more"></a></li>
 <li>下午在搭建新的项目运行环境，由于公司电脑在内网下下载不了node 依赖项，故只能采用，在自己电脑上下载好，copy到公司电脑。在copy过程中出现了node依赖模块目录太长而无法copy过长的目录，经过一番搜索，终于也解决之。</li>
 </ul>
 <h2 id="windows-下修改-user-agent-来伪装手机浏览器-上网"><a href="#windows-下修改-user-agent-来伪装手机浏览器-上网" class="headerlink" title="windows 下修改 user-agent 来伪装手机浏览器 上网"></a>windows 下修改 user-agent 来伪装手机浏览器 上网</h2><p>原理想清楚很简单，每个浏览器在发送http请求的时候都会附带本身的信息给服务器，这个默认情况下，用户不用管，程序员不用管，浏览器会在发送请求时自动附带信息，这样服务器就可以拿到客户端浏览器的信息了，包括操作系统，版本，内核等等的信息。而这些信息，在浏览器里就是 user-agent，简称ua ,公司的上网限制，也只做了限制windows pc电脑，故有了思路，我们修改下浏览器的 ua,即可骗过服务器。于是网上搜了下相关手机的ua，替换了上去即可，chrome修改最为方便，搜了一个ua如下：</p>
-<p><code>-user-agent=&quot;Mozlila/5.0 (iphone; CPU iphone OS 8_0 like Mac OS X) AppleWebKit/600.1.3(KHTML,like Geckko) Version/8.0&quot;</code></p>
-<p>之后就可以通过服务器检查验证了，如下，认证成功之后，我的电脑chrome浏览器就成为一个大屏的手机浏览器了访问百度和糯米都显示的都是手机版本的网页：</p>
+<p><code>&quot;Mozlila/5.0 (iphone; CPU iphone OS 8_0 like Mac OS X) AppleWebKit/600.1.3(KHTML,like Geckko) Version/8.0&quot;</code>  </p>
+<p>chrome 下设置步骤如下：</p>
+<ul>
+<li>右击chrome 属性，在目标栏目里添加：</li>
+</ul>
+<p> <code>-user-agent=&#39;Mozlila/5.0 (iphone; CPU iphone OS 8_0 like Mac OS X) AppleWebKit/600.1.3(KHTML,like Geckko) Version/8.0&#39;</code> </p>
+<p>其中 user-agent的值就是搜到的ua,包括mac电脑，及各种浏览器的的ua。</p>
+<p>之后就可以通过服务器检查验证了，如下，认证成功之后，我的电脑chrome浏览器就成为一个大屏的手机浏览器，访问百度和糯米都显示的都是手机版本的网页：</p>
 <p><strong> 手机糯米</strong><br><img src="http://o6k660ytf.bkt.clouddn.com//myimage/nuomi.png" class="糯米手机版" title="糯米"></p>
 <p><strong>手机百度</strong><br><img src="http://o6k660ytf.bkt.clouddn.com//myimage/baidu.png" class="手机百度" title="手机百度"></p>
 <p>更多ua设置可参考这里: </p>
