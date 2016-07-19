@@ -90,7 +90,7 @@ this 的取值我们分以下情况来讨论：
 <meta property="og:description" content="javascript 是一门灵活的语言，其中的this也是比较重要的知识点，现在这里归纳一下 javascript中的this，后面补几道题目，来加强一下认识：
 this 的取值我们分以下情况来讨论：
 构造函数中的thisjavascript中的构造函数就是用来new 特定对象的函数，因为es6之前,js都是没有class(类)的概念的，故看起来，js好像并没有创造对象的“类”，但，约定俗成的，有">
-<meta property="og:updated_time" content="2016-07-19T15:41:53.910Z">
+<meta property="og:updated_time" content="2016-07-19T15:53:04.596Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="javascript中的this">
 <meta name="twitter:description" content="javascript 是一门灵活的语言，其中的this也是比较重要的知识点，现在这里归纳一下 javascript中的this，后面补几道题目，来加强一下认识：
@@ -382,8 +382,16 @@ this 的取值我们分以下情况来讨论：
       
         <p>javascript 是一门灵活的语言，其中的this也是比较重要的知识点，现在这里归纳一下 javascript中的this，后面补几道题目，来加强一下认识：</p>
 <p>this 的取值我们分以下情况来讨论：</p>
-<h3 id="构造函数中的this"><a href="#构造函数中的this" class="headerlink" title="构造函数中的this"></a>构造函数中的this</h3><p>javascript中的构造函数就是用来new 特定对象的函数，因为es6之前,js都是没有class(类)的概念的，故看起来，js好像并没有创造对象的“类”，但，约定俗成的，有经验的js程序员都会用一个函数来做为对象的构造函数，一般情况下，构造函数首字母都大写。例如：Object,Function等。<br><a id="more"></a><br>    function Student(){<br>        this.name=”王世平”;<br>        this.age=24;<br>        console.log(this); //Student {name: “王世平”, age: 24}<br>    }<br>    var stu1=new Student();<br>    console.log(stu1.name); //王世平<br>    console.log(stu1.age);  //24</p>
-<p>故我们可以得出：</p>
+<h3 id="构造函数中的this"><a href="#构造函数中的this" class="headerlink" title="构造函数中的this"></a>构造函数中的this</h3><p>javascript中的构造函数就是用来new 特定对象的函数，因为es6之前,js都是没有class(类)的概念的，故看起来，js好像并没有创造对象的“类”，但，约定俗成的，有经验的js程序员都会用一个函数来做为对象的构造函数，一般情况下，构造函数首字母都大写。例如：Object,Function等。<br><a id="more"></a></p>
+<pre><code>function Student(){
+    this.name=&quot;王世平&quot;;
+    this.age=24;
+    console.log(this); //Student {name: &quot;王世平&quot;, age: 24}
+}
+var stu1=new Student();
+console.log(stu1.name); //王世平
+console.log(stu1.age);  //24
+</code></pre><p>故我们可以得出：</p>
 <blockquote>
 <p>如果函数作为构造函数用，其中的this指代的是该构造函数所创造出来的对象本身</p>
 </blockquote>
