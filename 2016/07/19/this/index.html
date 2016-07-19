@@ -64,7 +64,7 @@
 <link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="javascript," />
 
 
 
@@ -80,15 +80,31 @@
 
 
 
-<meta name="description" content="自由，该向何处。">
-<meta property="og:type" content="website">
-<meta property="og:title" content="王小王的小站">
-<meta property="og:url" content="http://wangshiping.net/tags/技术/index.html">
+<meta name="description" content="javascript 是一门灵活的语言，其中的this也是比较重要的知识点，现在这里归纳一下 javascript中的this，后面补几道题目，来加强一下认识：
+this 的取值我们分以下情况来讨论：
+
+构造函数中的this
+
+javascript中的构造函数就是用来new 特定对象的函数，因为es6之前,js都是没有class(类)的概念的，故看起来，js好像并没有创造对象的“类”，但，约定俗成">
+<meta property="og:type" content="article">
+<meta property="og:title" content="javascript中的this">
+<meta property="og:url" content="http://wangshiping.net/2016/07/19/this/index.html">
 <meta property="og:site_name" content="王小王的小站">
-<meta property="og:description" content="自由，该向何处。">
+<meta property="og:description" content="javascript 是一门灵活的语言，其中的this也是比较重要的知识点，现在这里归纳一下 javascript中的this，后面补几道题目，来加强一下认识：
+this 的取值我们分以下情况来讨论：
+
+构造函数中的this
+
+javascript中的构造函数就是用来new 特定对象的函数，因为es6之前,js都是没有class(类)的概念的，故看起来，js好像并没有创造对象的“类”，但，约定俗成">
+<meta property="og:updated_time" content="2016-07-19T14:40:54.669Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="王小王的小站">
-<meta name="twitter:description" content="自由，该向何处。">
+<meta name="twitter:title" content="javascript中的this">
+<meta name="twitter:description" content="javascript 是一门灵活的语言，其中的this也是比较重要的知识点，现在这里归纳一下 javascript中的this，后面补几道题目，来加强一下认识：
+this 的取值我们分以下情况来讨论：
+
+构造函数中的this
+
+javascript中的构造函数就是用来new 特定对象的函数，因为es6之前,js都是没有class(类)的概念的，故看起来，js好像并没有创造对象的“类”，但，约定俗成">
 
 
 
@@ -106,7 +122,7 @@
   };
 </script>
 
-  <title> 标签: 技术 | 王小王的小站 </title>
+  <title> javascript中的this | 王小王的小站 </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -147,7 +163,7 @@
     
   
 
-  <div class="container one-collumn sidebar-position-right  ">
+  <div class="container one-collumn sidebar-position-right page-post-detail ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -271,46 +287,205 @@
           <div id="content" class="content">
             
 
-  <div id="posts" class="posts-collapse">
-    <div class="collection-title">
-      <h2 >
-        技术
-        <small>标签</small>
-      </h2>
-    </div>
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
 
     
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                javascript中的this
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-07-19T22:18:01+08:00" content="2016-07-19">
+              2016-07-19
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/技术/" itemprop="url" rel="index">
+                    <span itemprop="name">技术</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/07/19/this/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/07/19/this/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+          <!-- 统计阅读量代码 -->
+        <!--   
+          &nbsp; | &nbsp;
+          <span id="/2016/07/19/this/"class="leancloud_visitors" data-flag-title="javascript中的this">
+            &nbsp;阅读次数
+          </span>
+           -->
+          
+
+          
+          
+             <span id="/2016/07/19/this/" class="leancloud_visitors" data-flag-title="javascript中的this">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
       
 
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+      
+        <p>javascript 是一门灵活的语言，其中的this也是比较重要的知识点，现在这里归纳一下 javascript中的this，后面补几道题目，来加强一下认识：</p>
+<p>this 的取值我们分以下情况来讨论：</p>
+<ul>
+<li>构造函数中的this</li>
+</ul>
+<p>javascript中的构造函数就是用来new 特定对象的函数，因为es6之前,js都是没有class(类)的概念的，故看起来，js好像并没有创造对象的“类”，但，约定俗成的，有经验的js程序员都会用一个函数来做为对象的构造函数，一般情况下，构造函数首字母都大写。例如：Object,Function等。</p>
+<pre><code>function Student(){
+    this.name=&quot;王世平&quot;;
+    this.age=24;
+    console.log(this); //Student {name: &quot;王世平&quot;, age: 24}
+}
+var stu1=new Student();
+console.log(stu1.name); //王世平
+console.log(stu1.age);  //24
+</code></pre><p>故我们可以得出：</p>
+<blockquote>
+<p>如果函数作为构造函数用，其中的this指代的是该构造函数所创造出来的对象本身</p>
+</blockquote>
+<p>注意一下，如果直接执行Student这个函数，其中的this打印出的是什么呢？ </p>
+<pre><code>Student(); // Window {speechSynthesis: SpeechSynthesis, caches: CacheStorage, localStorage: Storage, sessionStorage
+</code></pre><p>可以看到，这里的this指代window对象。</p>
+<ul>
+<li>函数作为对象的一个属性：</li>
+</ul>
 
-      <h1 class="post-title">
+      
+    </div>
+    
+    <div>
+      
         
-            <a class="post-title-link" href="/2016/05/17/thinkInIT/" itemprop="url">
-              
-                <span itemprop="name">为什么我想要做全栈工程师</span>
-              
-            </a>
-        
-      </h1>
+      
+    </div>
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2016-05-17T00:41:50+08:00"
-              content="2016-05-17" >
-          05-17
-        </time>
+    <div>
+      
+        
+<div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center">
+  <div>生活窘迫，来了就赏点吧~~</div>
+  <button id="rewardButton", disable="enable", onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}", style="cursor: pointer; border: 0; outline: 0; border-radius: 100%; padding: 0; margin: 0; letter-spacing: normal; text-transform: none; text-indent: 0px; text-shadow: none">
+    <span onmouseover="this.style.color='rgb(236,96,0)';this.style.background='rgb(204,204,204)'" onMouseOut="this.style.color='#fff';this.style.background='rgb(236,96,0)'" style="display: inline-block; width: 70px; height: 70px; border-radius: 100%; line-height: 81px; color: #fff; font: 400 35px/75px 'microsofty'; background: rgb(236,96,0)">赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="http://o6k660ytf.bkt.clouddn.com//pay/weixinpay.jpg" alt="王小王sean WeChat Pay" style="width: 200px; max-width: 100%; display: inline-block"/>
+        <p>微信打赏</p>
       </div>
+    
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="http://o6k660ytf.bkt.clouddn.com//pay/alipay.jpg" alt="王小王sean Alipay" style="width: 200px; max-width: 100%; display: inline-block"/>
+        <p>支付宝打赏</p>
+      </div>
+    
+  </div>
+</div>
 
-    </header>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/javascript/" rel="tag">#javascript</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/06/30/twoquestions/" rel="next" title="两个问题">
+                <i class="fa fa-chevron-left"></i> 两个问题
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </article>
 
 
-    
-  </div>
 
-  
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -318,6 +493,27 @@
 
 
           
+<div class="comments" id="comments">
+  
+  <div class="ds-thread" data-thread-key="2016/07/19/this/"
+           data-title="javascript中的this" data-url="http://wangshiping.net/2016/07/19/this/"></div>
+
+  <!-- 多说评论框 end -->
+  <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+  <script type="text/javascript">  
+     var duoshuoQuery = {short_name:"wangshiping"};  
+      (function() {  
+        var ds = document.createElement('script');  
+        ds.type = 'text/javascript';ds.async = true;  
+        ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';  
+        ds.charset = 'UTF-8';  
+        (document.getElementsByTagName('head')[0]   
+         || document.getElementsByTagName('body')[0]).appendChild(ds);  
+      })();  
+  </script>
+  
+</div>
+
         </div>
         
           
@@ -335,7 +531,12 @@
       
 
         
-      <section class="site-overview sidebar-panel  sidebar-panel-active ">
+          <ul class="sidebar-nav motion-element">
+            <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >文章目录</li>
+            <li class="sidebar-nav-overview" data-target="site-overview">站点概览</li>
+          </ul>
+        
+      <section class="site-overview sidebar-panel ">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                  src="/images/default_avatar.jpg"
@@ -403,6 +604,17 @@
 
           
           
+      </section>
+      
+      <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+        <div class="post-toc">
+          
+                
+              
+              
+                <p class="post-toc-empty">此文章未包含目录</p>
+          
+        </div>
       </section>
       
     </div>
@@ -532,6 +744,10 @@
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
 
   
 

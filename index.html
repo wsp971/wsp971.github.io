@@ -295,6 +295,164 @@
             
               
                 
+                <a class="post-title-link" href="/2016/07/19/this/" itemprop="url">
+                  javascript中的this
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-07-19T22:18:01+08:00" content="2016-07-19">
+              2016-07-19
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/技术/" itemprop="url" rel="index">
+                    <span itemprop="name">技术</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/07/19/this/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/07/19/this/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+          <!-- 统计阅读量代码 -->
+        <!--   
+          &nbsp; | &nbsp;
+          <span id="/2016/07/19/this/"class="leancloud_visitors" data-flag-title="javascript中的this">
+            &nbsp;阅读次数
+          </span>
+           -->
+          
+
+          
+          
+             <span id="/2016/07/19/this/" class="leancloud_visitors" data-flag-title="javascript中的this">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>javascript 是一门灵活的语言，其中的this也是比较重要的知识点，现在这里归纳一下 javascript中的this，后面补几道题目，来加强一下认识：</p>
+<p>this 的取值我们分以下情况来讨论：</p>
+<ul>
+<li>构造函数中的this</li>
+</ul>
+<p>javascript中的构造函数就是用来new 特定对象的函数，因为es6之前,js都是没有class(类)的概念的，故看起来，js好像并没有创造对象的“类”，但，约定俗成的，有经验的js程序员都会用一个函数来做为对象的构造函数，一般情况下，构造函数首字母都大写。例如：Object,Function等。</p>
+<pre><code>function Student(){
+    this.name=&quot;王世平&quot;;
+    this.age=24;
+    console.log(this); //Student {name: &quot;王世平&quot;, age: 24}
+}
+var stu1=new Student();
+console.log(stu1.name); //王世平
+console.log(stu1.age);  //24
+</code></pre><p>故我们可以得出：</p>
+<blockquote>
+<p>如果函数作为构造函数用，其中的this指代的是该构造函数所创造出来的对象本身</p>
+</blockquote>
+<p>注意一下，如果直接执行Student这个函数，其中的this打印出的是什么呢？ </p>
+<pre><code>Student(); // Window {speechSynthesis: SpeechSynthesis, caches: CacheStorage, localStorage: Storage, sessionStorage
+</code></pre><p>可以看到，这里的this指代window对象。</p>
+<ul>
+<li>函数作为对象的一个属性：</li>
+</ul>
+
+          
+        
+      
+    </div>
+    
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2016/06/30/twoquestions/" itemprop="url">
                   两个问题
                 </a>
@@ -838,146 +996,6 @@
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/05/27/regular-expression/" itemprop="url">
-                  正则表达式
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-05-27T22:29:10+08:00" content="2016-05-27">
-              2016-05-27
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/技术/" itemprop="url" rel="index">
-                    <span itemprop="name">技术</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/05/27/regular-expression/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/05/27/regular-expression/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-          <!-- 统计阅读量代码 -->
-        <!--   
-          &nbsp; | &nbsp;
-          <span id="/2016/05/27/regular-expression/"class="leancloud_visitors" data-flag-title="正则表达式">
-            &nbsp;阅读次数
-          </span>
-           -->
-          
-
-          
-          
-             <span id="/2016/05/27/regular-expression/" class="leancloud_visitors" data-flag-title="正则表达式">
-               &nbsp; | &nbsp;
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               <span class="post-meta-item-text">阅读次数 </span>
-               <span class="leancloud-visitors-count"></span>
-              </span>
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h1 id="正则表达式-语法"><a href="#正则表达式-语法" class="headerlink" title="正则表达式-语法"></a>正则表达式-语法</h1><p><strong>何为正则表达式？</strong></p>
-<blockquote>
-<p>正则表达式(regular expression)描述了一种字符串匹配的模式，可以用来检查一个串是否含有某种子串、将匹配的子串做替换或者从某个串中取出符合某个条件的子串等。</p>
-</blockquote>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/05/27/regular-expression/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-    
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1020,7 +1038,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">12</span>
+              <span class="site-state-item-count">13</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
