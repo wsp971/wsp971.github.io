@@ -82,29 +82,20 @@
 
 <meta name="description" content="javascript 是一门灵活的语言，其中的this也是比较重要的知识点，现在这里归纳一下 javascript中的this，后面补几道题目，来加强一下认识：
 this 的取值我们分以下情况来讨论：
-
-构造函数中的this
-
-javascript中的构造函数就是用来new 特定对象的函数，因为es6之前,js都是没有class(类)的概念的，故看起来，js好像并没有创造对象的“类”，但，约定俗成">
+构造函数中的thisjavascript中的构造函数就是用来new 特定对象的函数，因为es6之前,js都是没有class(类)的概念的，故看起来，js好像并没有创造对象的“类”，但，约定俗成的，有">
 <meta property="og:type" content="article">
 <meta property="og:title" content="javascript中的this">
 <meta property="og:url" content="http://wangshiping.net/2016/07/19/this/index.html">
 <meta property="og:site_name" content="王小王的小站">
 <meta property="og:description" content="javascript 是一门灵活的语言，其中的this也是比较重要的知识点，现在这里归纳一下 javascript中的this，后面补几道题目，来加强一下认识：
 this 的取值我们分以下情况来讨论：
-
-构造函数中的this
-
-javascript中的构造函数就是用来new 特定对象的函数，因为es6之前,js都是没有class(类)的概念的，故看起来，js好像并没有创造对象的“类”，但，约定俗成">
-<meta property="og:updated_time" content="2016-07-19T14:40:54.669Z">
+构造函数中的thisjavascript中的构造函数就是用来new 特定对象的函数，因为es6之前,js都是没有class(类)的概念的，故看起来，js好像并没有创造对象的“类”，但，约定俗成的，有">
+<meta property="og:updated_time" content="2016-07-19T15:24:03.349Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="javascript中的this">
 <meta name="twitter:description" content="javascript 是一门灵活的语言，其中的this也是比较重要的知识点，现在这里归纳一下 javascript中的this，后面补几道题目，来加强一下认识：
 this 的取值我们分以下情况来讨论：
-
-构造函数中的this
-
-javascript中的构造函数就是用来new 特定对象的函数，因为es6之前,js都是没有class(类)的概念的，故看起来，js好像并没有创造对象的“类”，但，约定俗成">
+构造函数中的thisjavascript中的构造函数就是用来new 特定对象的函数，因为es6之前,js都是没有class(类)的概念的，故看起来，js好像并没有创造对象的“类”，但，约定俗成的，有">
 
 
 
@@ -391,28 +382,72 @@ javascript中的构造函数就是用来new 特定对象的函数，因为es6之
       
         <p>javascript 是一门灵活的语言，其中的this也是比较重要的知识点，现在这里归纳一下 javascript中的this，后面补几道题目，来加强一下认识：</p>
 <p>this 的取值我们分以下情况来讨论：</p>
-<ul>
-<li>构造函数中的this</li>
-</ul>
-<p>javascript中的构造函数就是用来new 特定对象的函数，因为es6之前,js都是没有class(类)的概念的，故看起来，js好像并没有创造对象的“类”，但，约定俗成的，有经验的js程序员都会用一个函数来做为对象的构造函数，一般情况下，构造函数首字母都大写。例如：Object,Function等。</p>
-<pre><code>function Student(){
-    this.name=&quot;王世平&quot;;
-    this.age=24;
-    console.log(this); //Student {name: &quot;王世平&quot;, age: 24}
-}
-var stu1=new Student();
-console.log(stu1.name); //王世平
-console.log(stu1.age);  //24
-</code></pre><p>故我们可以得出：</p>
+<h3 id="构造函数中的this"><a href="#构造函数中的this" class="headerlink" title="构造函数中的this"></a>构造函数中的this</h3><p>javascript中的构造函数就是用来new 特定对象的函数，因为es6之前,js都是没有class(类)的概念的，故看起来，js好像并没有创造对象的“类”，但，约定俗成的，有经验的js程序员都会用一个函数来做为对象的构造函数，一般情况下，构造函数首字母都大写。例如：Object,Function等。<br><a id="more"></a><br>    function Student(){<br>        this.name=”王世平”;<br>        this.age=24;<br>        console.log(this); //Student {name: “王世平”, age: 24}<br>    }<br>    var stu1=new Student();<br>    console.log(stu1.name); //王世平<br>    console.log(stu1.age);  //24</p>
+<p>故我们可以得出：</p>
 <blockquote>
 <p>如果函数作为构造函数用，其中的this指代的是该构造函数所创造出来的对象本身</p>
 </blockquote>
 <p>注意一下，如果直接执行Student这个函数，其中的this打印出的是什么呢？ </p>
 <pre><code>Student(); // Window {speechSynthesis: SpeechSynthesis, caches: CacheStorage, localStorage: Storage, sessionStorage
 </code></pre><p>可以看到，这里的this指代window对象。</p>
-<ul>
-<li>函数作为对象的一个属性：</li>
-</ul>
+<h3 id="函数作为对象的一个属性："><a href="#函数作为对象的一个属性：" class="headerlink" title="函数作为对象的一个属性："></a>函数作为对象的一个属性：</h3><p>如果函数作为对象的一个属性，并且通过该对象来进行调用，那么其中的的this指代对象本身：</p>
+<pre><code>var testObj={
+    name:&quot;wsp&quot;,
+    getName:function(){
+        console.log(this)//Object{name:&quot;wsp&quot;,fun:function()}
+        console.log(this.name);//wsp
+    }
+}
+testObj.getName();
+</code></pre><p>注意：如果，函数不是作为该对象的一个属性调用，而是</p>
+<pre><code>var testFun=testObj.getName;
+testFun();
+</code></pre><p>这个时候 this的值就不再是所定义的对象testObj了，而是window对象，this.name 为undefined;</p>
+<h3 id="函数用call-或者-apply-调用"><a href="#函数用call-或者-apply-调用" class="headerlink" title="函数用call 或者 apply 调用"></a>函数用call 或者 apply 调用</h3><p>当一个函数被 call 或者 apply 调用时，this，就是所传入的对象。</p>
+<pre><code>var obj={
+    x:&quot;10&quot;
+}
+var fun=function(){
+    console.log(this);//Object{x:10}
+    console.log(this.x);//10
+}
+fun.call(obj);
+</code></pre><h3 id="全局调用-amp-调用普通函数"><a href="#全局调用-amp-调用普通函数" class="headerlink" title="全局调用 &amp; 调用普通函数"></a>全局调用 &amp; 调用普通函数</h3><p>在全局环境下：this 永远是window,例如：</p>
+<pre><code>console.log(this===window)//true    
+</code></pre><p>调用普通函数，其内部this 也是window</p>
+<pre><code>var x=2;
+var fun2=function(){
+    console.log(this);//window
+    console.log(this.x)//2
+}
+</code></pre><p><strong>请注意一下情况：</strong></p>
+<pre><code>var obj={
+    x:10,
+    fn:function(){
+        var f=function(){
+            console.log(this);//window
+            console.log(this.x);//undefined
+        }
+        f();
+    }
+}
+obj.fn();
+</code></pre><blockquote>
+<p>可以看出这里f函数里的this,还是window</p>
+</blockquote>
+<h3 id="构造函数的原型中的this"><a href="#构造函数的原型中的this" class="headerlink" title="构造函数的原型中的this"></a>构造函数的原型中的this</h3><p>在构造函数的原型中this，也指向构造函数所创造的对象,这个跟构造函数一样，很好理解。</p>
+<pre><code>function Student(){
+    this.name=&quot;王世平&quot;;
+}
+Student.prototype.getName=function(){
+    console.log(this.name);
+}
+var wsp=new Student();
+wsp.getName();
+</code></pre><blockquote>
+<p>当然在整个原型链中，this,都指向 构造函数所创建的对象。</p>
+</blockquote>
+<hr>
 
       
     </div>
@@ -612,7 +647,7 @@ console.log(stu1.age);  //24
                 
               
               
-                <p class="post-toc-empty">此文章未包含目录</p>
+          <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#构造函数中的this"><span class="nav-number">1.</span> <span class="nav-text">构造函数中的this</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#函数作为对象的一个属性："><span class="nav-number">2.</span> <span class="nav-text">函数作为对象的一个属性：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#函数用call-或者-apply-调用"><span class="nav-number">3.</span> <span class="nav-text">函数用call 或者 apply 调用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#全局调用-amp-调用普通函数"><span class="nav-number">4.</span> <span class="nav-text">全局调用 & 调用普通函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#构造函数的原型中的this"><span class="nav-number">5.</span> <span class="nav-text">构造函数的原型中的this</span></a></li></ol></div>
           
         </div>
       </section>

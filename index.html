@@ -379,33 +379,14 @@
 
       
         
-          
-            <p>javascript 是一门灵活的语言，其中的this也是比较重要的知识点，现在这里归纳一下 javascript中的this，后面补几道题目，来加强一下认识：</p>
+          <p>javascript 是一门灵活的语言，其中的this也是比较重要的知识点，现在这里归纳一下 javascript中的this，后面补几道题目，来加强一下认识：</p>
 <p>this 的取值我们分以下情况来讨论：</p>
-<ul>
-<li>构造函数中的this</li>
-</ul>
-<p>javascript中的构造函数就是用来new 特定对象的函数，因为es6之前,js都是没有class(类)的概念的，故看起来，js好像并没有创造对象的“类”，但，约定俗成的，有经验的js程序员都会用一个函数来做为对象的构造函数，一般情况下，构造函数首字母都大写。例如：Object,Function等。</p>
-<pre><code>function Student(){
-    this.name=&quot;王世平&quot;;
-    this.age=24;
-    console.log(this); //Student {name: &quot;王世平&quot;, age: 24}
-}
-var stu1=new Student();
-console.log(stu1.name); //王世平
-console.log(stu1.age);  //24
-</code></pre><p>故我们可以得出：</p>
-<blockquote>
-<p>如果函数作为构造函数用，其中的this指代的是该构造函数所创造出来的对象本身</p>
-</blockquote>
-<p>注意一下，如果直接执行Student这个函数，其中的this打印出的是什么呢？ </p>
-<pre><code>Student(); // Window {speechSynthesis: SpeechSynthesis, caches: CacheStorage, localStorage: Storage, sessionStorage
-</code></pre><p>可以看到，这里的this指代window对象。</p>
-<ul>
-<li>函数作为对象的一个属性：</li>
-</ul>
-
-          
+<h3 id="构造函数中的this"><a href="#构造函数中的this" class="headerlink" title="构造函数中的this"></a>构造函数中的this</h3><p>javascript中的构造函数就是用来new 特定对象的函数，因为es6之前,js都是没有class(类)的概念的，故看起来，js好像并没有创造对象的“类”，但，约定俗成的，有经验的js程序员都会用一个函数来做为对象的构造函数，一般情况下，构造函数首字母都大写。例如：Object,Function等。<br>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/07/19/this/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
         
       
     </div>
