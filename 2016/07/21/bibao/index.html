@@ -82,41 +82,20 @@
 
 <meta name="description" content="javascript中最难理解和掌握的几个点，今天来总结一下：
 作用域
-作用域，编程语言里即指变量的作用域，通俗一点讲就是变量的作用范围，javascript 没有“块”级作用域，所谓“块”，就是指“{}” 括起来的部分。例如：if,for等语句大括号内的内容：
-
-var i=10;
-if(i&amp;gt;5){
-    var j=i;
-}
-console.log(j);// 10
-可以看到在if之外">
+作用域，编程语言里即指变量的作用域，通俗一点讲就是变量的作用范围，javascript 没有“块”级作用域，所谓“块”，就是指“{}” 括起来的部分。例如：if,for等语句大括号内的内容：">
 <meta property="og:type" content="article">
 <meta property="og:title" content="作用域，执行上下文，闭包">
 <meta property="og:url" content="http://wangshiping.net/2016/07/21/bibao/index.html">
 <meta property="og:site_name" content="王小王的小站">
 <meta property="og:description" content="javascript中最难理解和掌握的几个点，今天来总结一下：
 作用域
-作用域，编程语言里即指变量的作用域，通俗一点讲就是变量的作用范围，javascript 没有“块”级作用域，所谓“块”，就是指“{}” 括起来的部分。例如：if,for等语句大括号内的内容：
-
-var i=10;
-if(i&amp;gt;5){
-    var j=i;
-}
-console.log(j);// 10
-可以看到在if之外">
-<meta property="og:updated_time" content="2016-07-21T15:55:52.897Z">
+作用域，编程语言里即指变量的作用域，通俗一点讲就是变量的作用范围，javascript 没有“块”级作用域，所谓“块”，就是指“{}” 括起来的部分。例如：if,for等语句大括号内的内容：">
+<meta property="og:updated_time" content="2016-07-21T16:57:52.230Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="作用域，执行上下文，闭包">
 <meta name="twitter:description" content="javascript中最难理解和掌握的几个点，今天来总结一下：
 作用域
-作用域，编程语言里即指变量的作用域，通俗一点讲就是变量的作用范围，javascript 没有“块”级作用域，所谓“块”，就是指“{}” 括起来的部分。例如：if,for等语句大括号内的内容：
-
-var i=10;
-if(i&amp;gt;5){
-    var j=i;
-}
-console.log(j);// 10
-可以看到在if之外">
+作用域，编程语言里即指变量的作用域，通俗一点讲就是变量的作用范围，javascript 没有“块”级作用域，所谓“块”，就是指“{}” 括起来的部分。例如：if,for等语句大括号内的内容：">
 
 
 
@@ -405,6 +384,7 @@ console.log(j);// 10
 <h2 id="作用域"><a href="#作用域" class="headerlink" title="作用域"></a>作用域</h2><blockquote>
 <p>作用域，编程语言里即指变量的作用域，通俗一点讲就是变量的作用范围，javascript 没有“块”级作用域，所谓“块”，就是指“{}” 括起来的部分。例如：if,for等语句大括号内的内容：</p>
 </blockquote>
+<a id="more"></a>
 <pre><code>var i=10;
 if(i&gt;5){
     var j=i;
@@ -441,7 +421,45 @@ function f1(){
     e1();
 }
 f1();
-</code></pre><p>看起来很简单，很容易理解，作用域是有层级关系的，函数g1作用域内 自然可以访问函数f1作用域内的变量，即使我们在调用的e1函数内，我们队这些变量重新赋值，在执行过程中取值时，对于函数自己作用域内没有定义的变量，他会从父级作用域来寻找这个变量，直到全局作用域，找不到，就会报错，这种在函数自身内没有定义的变量，我们称之为<strong>自由变量</strong>，这个从函数定义的作用域往上级找变量的顺序，我们称之为<strong>作用域链</strong></p>
+</code></pre><p>看起来很简单，很容易理解，作用域是有层级关系的，函数g1作用域内 自然可以访问函数f1作用域内的变量，即使我们在调用的e1函数内，我们队这些变量重新赋值，在执行过程中取值时，对于函数自己作用域内没有定义的变量，他会从父级作用域来寻找这个变量，直到全局作用域，找不到，就会报错，这种在函数自身内没有定义，但是却有引用的变量，我们称之为<strong>自由变量</strong>，这个从函数定义的作用域往上级找变量的顺序，我们称之为<strong>作用域链</strong></p>
+<p>因此，我们可以得到以下结论：</p>
+<blockquote>
+<p>自由变量的取值是从作用域链有内往外去取值的。而作用域是在函数定义的时候就已经确认了的。</p>
+</blockquote>
+<h2 id="上下文环境"><a href="#上下文环境" class="headerlink" title="上下文环境"></a>上下文环境</h2><blockquote>
+<p>我们知道作用域是在函数定义的时候就定义好了的，而，上下文环境是什么呢？上下文环境是，函数在执行时所创建的一个临时性的变量空间，这是一个堆栈性质的数据结构，即，在调用函数时，才会产生函数的上下文执行环境。还是举个例子：</p>
+</blockquote>
+<pre><code>//全局作用域
+var a=10;
+var b=20;
+function fn(x){
+    var c=30;
+    var d=40;
+    console.log(x);
+    function f(x){
+        var e=50;
+        var f=60;
+        console.log(x);
+        console.log(c);
+    }
+    f(10);
+    f(20);
+}
+fn(10);
+console.log(b);
+</code></pre><p>来分析一下，这段代码执行时候的上下文环境：</p>
+<ul>
+<li>全局上下文环境，给 a、b 、this 赋值</li>
+<li>执行fn(10),创建 fn(10)的执行上下文，注意是<strong>fn(10)</strong> 的上下文环境，压栈,此时fn(10)的上下文环境为活跃的上下文环境、此环境下赋值a,d,x，this，f,直到执行f(10);</li>
+<li>执行f(10),创建f(10)的上下文环境，压栈，给e,f,this,赋值，执行完毕，退出f(10)的上下文环境，此上下文环境销毁，出栈到fn(10)的上下文环境。</li>
+<li>执行f(20),创建f(20)的上下文环境、压栈，同f(10)，一样，压栈，执行，出栈，销毁。</li>
+<li>fn(10),执行完毕，退出fn(10)上下文环境，出栈到全局上下文环境。</li>
+<li>执行完console.log(b)，之后所有执行完毕，故此时销毁全局上下文。</li>
+</ul>
+<p>从以上的上下文分析可以看出：</p>
+<blockquote>
+<p>只有函数执行时才可以产生上下文，并且，一个函数可以产生多个执行上下文。<br>执行上下文在一般情况下执行完后，都会销毁，除非 接下来讲的“闭包”。</p>
+</blockquote>
 
       
     </div>
@@ -647,7 +665,7 @@ f1();
                 
               
               
-          <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#作用域"><span class="nav-number">1.</span> <span class="nav-text">作用域</span></a></li></ol></div>
+          <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#作用域"><span class="nav-number">1.</span> <span class="nav-text">作用域</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#上下文环境"><span class="nav-number">2.</span> <span class="nav-text">上下文环境</span></a></li></ol></div>
           
         </div>
       </section>
