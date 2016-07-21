@@ -295,6 +295,181 @@
             
               
                 
+                <a class="post-title-link" href="/2016/07/21/bibao/" itemprop="url">
+                  作用域，执行上下文，闭包
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-07-21T23:15:57+08:00" content="2016-07-21">
+              2016-07-21
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/技术/" itemprop="url" rel="index">
+                    <span itemprop="name">技术</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/07/21/bibao/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/07/21/bibao/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+          <!-- 统计阅读量代码 -->
+        <!--   
+          &nbsp; | &nbsp;
+          <span id="/2016/07/21/bibao/"class="leancloud_visitors" data-flag-title="作用域，执行上下文，闭包">
+            &nbsp;阅读次数
+          </span>
+           -->
+          
+
+          
+          
+             <span id="/2016/07/21/bibao/" class="leancloud_visitors" data-flag-title="作用域，执行上下文，闭包">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>javascript中最难理解和掌握的几个点，今天来总结一下：</p>
+<h2 id="作用域"><a href="#作用域" class="headerlink" title="作用域"></a>作用域</h2><blockquote>
+<p>作用域，编程语言里即指变量的作用域，通俗一点讲就是变量的作用范围，javascript 没有“块”级作用域，所谓“块”，就是指“{}” 括起来的部分。例如：if,for等语句大括号内的内容：</p>
+</blockquote>
+<pre><code>var i=10;
+if(i&gt;5){
+    var j=i;
+}
+console.log(j);// 10
+</code></pre><p>可以看到在if之外，还可以访问到括号里边定义的变量j;</p>
+<p>我们要记住的是：<strong>javascript中出了全局作用域，只有函数可以创建作用域</strong>，全局作用域，即是我们js所执行的最外层执行环境，例如浏览器script标签提供的执行作用域。</p>
+<blockquote>
+<p>作用域类似于变量所定义的地盘一样，可以隔离变量的作用范围。</p>
+</blockquote>
+<pre><code>var a=10; //全局作用域
+function f1(){
+    // 函数f定义的作用域
+    var b=9;
+    var c=8;
+    function g1(){
+        //函数g定义的作用域
+        var d=7;
+        var e=6;
+        console.log(a);//10
+        console.log(b);//9
+        console.log(c);//8
+        console.log(d);//7
+        console.log(e);//6
+        console.log(f);//f is undefined
+        console.log(g);//g is undefined
+    }
+    function e1(){
+        var f=5;
+        var g=4;
+        var a=&quot;a&quot;,b=&quot;b&quot;,c=&quot;c&quot;,d=&quot;d&quot;,e=&quot;e&quot;;
+        g1(); 
+    }
+    e1();
+}
+f1();
+</code></pre><p>看起来很简单，很容易理解，作用域是有层级关系的，函数g1作用域内 自然可以访问函数f1作用域内的变量，即使我们在调用的e1函数内，我们队这些变量重新赋值，在执行过程中取值时，对于函数自己作用域内没有定义的变量，他会从父级作用域来寻找这个变量，直到全局作用域，找不到，就会报错，这种在函数自身内没有定义的变量，我们称之为<strong>自由变量</strong>，这个从函数定义的作用域往上级找变量的顺序，我们称之为<strong>作用域链</strong></p>
+
+          
+        
+      
+    </div>
+    
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2016/07/19/this/" itemprop="url">
                   javascript中的this
                 </a>
@@ -381,7 +556,7 @@
         
           <p>javascript 是一门灵活的语言，其中的this也是比较重要的知识点，现在这里归纳一下 javascript中的this，后面补几道题目，来加强一下认识：</p>
 <p>this 的取值我们分以下情况来讨论：</p>
-<h3 id="构造函数中的this"><a href="#构造函数中的this" class="headerlink" title="构造函数中的this"></a>构造函数中的this</h3><p>javascript中的构造函数就是用来new 特定对象的函数，因为es6之前,js都是没有class(类)的概念的，故看起来，js好像并没有创造对象的“类”，但，约定俗成的，有经验的js程序员都会用一个函数来做为对象的构造函数，一般情况下，构造函数首字母都大写。例如：Object,Function等。<br>
+<h3 id="构造函数中的this"><a href="#构造函数中的this" class="headerlink" title="构造函数中的this"></a>构造函数中的this</h3><p>javascript中的构造函数就是用来new 特定对象的函数，因为es6之前,js都是没有class(类)的概念的，故看起来，js好像并没有创造对象的“类”，但，约定俗成的，有经验的js程序员都会用一个函数来做为对象的构造函数，一般情况下，构造函数首字母都大写。例如：Object,Function等。</p>
           <div class="post-more-link text-center">
             <a class="btn" href="/2016/07/19/this/#more" rel="contents">
               阅读全文 &raquo;
@@ -837,146 +1012,6 @@
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/06/06/howtolife/" itemprop="url">
-                  生活应该怎么过
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-06-06T00:10:18+08:00" content="2016-06-06">
-              2016-06-06
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/生活/" itemprop="url" rel="index">
-                    <span itemprop="name">生活</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/06/06/howtolife/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/06/06/howtolife/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-          <!-- 统计阅读量代码 -->
-        <!--   
-          &nbsp; | &nbsp;
-          <span id="/2016/06/06/howtolife/"class="leancloud_visitors" data-flag-title="生活应该怎么过">
-            &nbsp;阅读次数
-          </span>
-           -->
-          
-
-          
-          
-             <span id="/2016/06/06/howtolife/" class="leancloud_visitors" data-flag-title="生活应该怎么过">
-               &nbsp; | &nbsp;
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               <span class="post-meta-item-text">阅读次数 </span>
-               <span class="leancloud-visitors-count"></span>
-              </span>
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>最近，禁不住“诱惑”的我又开始报名到健身房健身了，原因有二：</p>
-<blockquote>
-<p>最近加班好多，身体无恙，但是挺害怕身体突然那一天出问题，周围也有同事，或者同事的亲人身体出了毛病，花了不少钱除外，身体还要忍受疾病的折磨，我想在我身体出问题前，自己多锻炼，加强自己身体素质。<br>去健身房看到了好多“猛男”，让我看到了希望，其实不论个头的大小，那些拥有完美线条的教练，看起来真的不一样。</p>
-</blockquote>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/06/06/howtolife/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-    
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1019,7 +1054,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">13</span>
+              <span class="site-state-item-count">14</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -1041,7 +1076,7 @@
             
             <a href="/tags">
               
-              <span class="site-state-item-count">17</span>
+              <span class="site-state-item-count">20</span>
               <span class="site-state-item-name">标签</span>
               
             </a>

@@ -64,7 +64,7 @@
 <link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="javascript,闭包,作用域,执行上下文," />
 
 
 
@@ -80,15 +80,43 @@
 
 
 
-<meta name="description" content="自由，该向何处。">
-<meta property="og:type" content="website">
-<meta property="og:title" content="王小王的小站">
-<meta property="og:url" content="http://wangshiping.net/archives/2016/05/page/2/index.html">
+<meta name="description" content="javascript中最难理解和掌握的几个点，今天来总结一下：
+作用域
+作用域，编程语言里即指变量的作用域，通俗一点讲就是变量的作用范围，javascript 没有“块”级作用域，所谓“块”，就是指“{}” 括起来的部分。例如：if,for等语句大括号内的内容：
+
+var i=10;
+if(i&amp;gt;5){
+    var j=i;
+}
+console.log(j);// 10
+可以看到在if之外">
+<meta property="og:type" content="article">
+<meta property="og:title" content="作用域，执行上下文，闭包">
+<meta property="og:url" content="http://wangshiping.net/2016/07/21/bibao/index.html">
 <meta property="og:site_name" content="王小王的小站">
-<meta property="og:description" content="自由，该向何处。">
+<meta property="og:description" content="javascript中最难理解和掌握的几个点，今天来总结一下：
+作用域
+作用域，编程语言里即指变量的作用域，通俗一点讲就是变量的作用范围，javascript 没有“块”级作用域，所谓“块”，就是指“{}” 括起来的部分。例如：if,for等语句大括号内的内容：
+
+var i=10;
+if(i&amp;gt;5){
+    var j=i;
+}
+console.log(j);// 10
+可以看到在if之外">
+<meta property="og:updated_time" content="2016-07-21T15:55:52.897Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="王小王的小站">
-<meta name="twitter:description" content="自由，该向何处。">
+<meta name="twitter:title" content="作用域，执行上下文，闭包">
+<meta name="twitter:description" content="javascript中最难理解和掌握的几个点，今天来总结一下：
+作用域
+作用域，编程语言里即指变量的作用域，通俗一点讲就是变量的作用范围，javascript 没有“块”级作用域，所谓“块”，就是指“{}” 括起来的部分。例如：if,for等语句大括号内的内容：
+
+var i=10;
+if(i&amp;gt;5){
+    var j=i;
+}
+console.log(j);// 10
+可以看到在if之外">
 
 
 
@@ -106,7 +134,7 @@
   };
 </script>
 
-  <title> 归档 | 王小王的小站 </title>
+  <title> 作用域，执行上下文，闭包 | 王小王的小站 </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -147,7 +175,7 @@
     
   
 
-  <div class="container one-collumn sidebar-position-right  page-archive  ">
+  <div class="container one-collumn sidebar-position-right page-post-detail ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -271,144 +299,228 @@
           <div id="content" class="content">
             
 
-  <section id="posts" class="posts-collapse">
-    <span class="archive-move-on"></span>
-
-    <span class="archive-page-counter">
-      
-      
-      
-        
-      
-      嗯..! 目前共计 14 篇日志。 继续努力。
-    </span>
-
+  <div id="posts" class="posts-expand">
     
-
-      
-      
-      
-
-      
-        
-        <div class="collection-title">
-          <h2 class="archive-year motion-element" id="archive-year-2016">2016</h2>
-        </div>
-      
-      
-
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h1 class="post-title">
-        
-            <a class="post-title-link" href="/2016/05/17/choose/" itemprop="url">
-              
-                <span itemprop="name">关于选择</span>
-              
-            </a>
-        
-      </h1>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2016-05-17T00:26:28+08:00"
-              content="2016-05-17" >
-          05-17
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-    
-
-      
-      
-      
-
-      
-      
-
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h1 class="post-title">
-        
-            <a class="post-title-link" href="/2016/05/13/think/" itemprop="url">
-              
-                <span itemprop="name">社会需要怎样的人？</span>
-              
-            </a>
-        
-      </h1>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2016-05-13T23:11:43+08:00"
-              content="2016-05-13" >
-          05-13
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-    
-
-      
-      
-      
-
-      
-      
-
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h1 class="post-title">
-        
-            <a class="post-title-link" href="/2016/05/08/近日/" itemprop="url">
-              
-                <span itemprop="name">最近的生活</span>
-              
-            </a>
-        
-      </h1>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2016-05-08T20:51:07+08:00"
-              content="2016-05-08" >
-          05-08
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-    
-
-  </section>
 
   
-  <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/archives/2016/05/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/archives/2016/05/">1</a><span class="page-number current">2</span>
-  </nav>
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                作用域，执行上下文，闭包
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-07-21T23:15:57+08:00" content="2016-07-21">
+              2016-07-21
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/技术/" itemprop="url" rel="index">
+                    <span itemprop="name">技术</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/07/21/bibao/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/07/21/bibao/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+          <!-- 统计阅读量代码 -->
+        <!--   
+          &nbsp; | &nbsp;
+          <span id="/2016/07/21/bibao/"class="leancloud_visitors" data-flag-title="作用域，执行上下文，闭包">
+            &nbsp;阅读次数
+          </span>
+           -->
+          
+
+          
+          
+             <span id="/2016/07/21/bibao/" class="leancloud_visitors" data-flag-title="作用域，执行上下文，闭包">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+        </div>
+      </header>
+    
 
 
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>javascript中最难理解和掌握的几个点，今天来总结一下：</p>
+<h2 id="作用域"><a href="#作用域" class="headerlink" title="作用域"></a>作用域</h2><blockquote>
+<p>作用域，编程语言里即指变量的作用域，通俗一点讲就是变量的作用范围，javascript 没有“块”级作用域，所谓“块”，就是指“{}” 括起来的部分。例如：if,for等语句大括号内的内容：</p>
+</blockquote>
+<pre><code>var i=10;
+if(i&gt;5){
+    var j=i;
+}
+console.log(j);// 10
+</code></pre><p>可以看到在if之外，还可以访问到括号里边定义的变量j;</p>
+<p>我们要记住的是：<strong>javascript中出了全局作用域，只有函数可以创建作用域</strong>，全局作用域，即是我们js所执行的最外层执行环境，例如浏览器script标签提供的执行作用域。</p>
+<blockquote>
+<p>作用域类似于变量所定义的地盘一样，可以隔离变量的作用范围。</p>
+</blockquote>
+<pre><code>var a=10; //全局作用域
+function f1(){
+    // 函数f定义的作用域
+    var b=9;
+    var c=8;
+    function g1(){
+        //函数g定义的作用域
+        var d=7;
+        var e=6;
+        console.log(a);//10
+        console.log(b);//9
+        console.log(c);//8
+        console.log(d);//7
+        console.log(e);//6
+        console.log(f);//f is undefined
+        console.log(g);//g is undefined
+    }
+    function e1(){
+        var f=5;
+        var g=4;
+        var a=&quot;a&quot;,b=&quot;b&quot;,c=&quot;c&quot;,d=&quot;d&quot;,e=&quot;e&quot;;
+        g1(); 
+    }
+    e1();
+}
+f1();
+</code></pre><p>看起来很简单，很容易理解，作用域是有层级关系的，函数g1作用域内 自然可以访问函数f1作用域内的变量，即使我们在调用的e1函数内，我们队这些变量重新赋值，在执行过程中取值时，对于函数自己作用域内没有定义的变量，他会从父级作用域来寻找这个变量，直到全局作用域，找不到，就会报错，这种在函数自身内没有定义的变量，我们称之为<strong>自由变量</strong>，这个从函数定义的作用域往上级找变量的顺序，我们称之为<strong>作用域链</strong></p>
+
+      
+    </div>
+    
+    <div>
+      
+        
+      
+    </div>
+
+    <div>
+      
+        
+<div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center">
+  <div>生活窘迫，来了就赏点吧~~</div>
+  <button id="rewardButton", disable="enable", onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}", style="cursor: pointer; border: 0; outline: 0; border-radius: 100%; padding: 0; margin: 0; letter-spacing: normal; text-transform: none; text-indent: 0px; text-shadow: none">
+    <span onmouseover="this.style.color='rgb(236,96,0)';this.style.background='rgb(204,204,204)'" onMouseOut="this.style.color='#fff';this.style.background='rgb(236,96,0)'" style="display: inline-block; width: 70px; height: 70px; border-radius: 100%; line-height: 81px; color: #fff; font: 400 35px/75px 'microsofty'; background: rgb(236,96,0)">赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="http://o6k660ytf.bkt.clouddn.com//pay/weixinpay.jpg" alt="王小王sean WeChat Pay" style="width: 200px; max-width: 100%; display: inline-block"/>
+        <p>微信打赏</p>
+      </div>
+    
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="http://o6k660ytf.bkt.clouddn.com//pay/alipay.jpg" alt="王小王sean Alipay" style="width: 200px; max-width: 100%; display: inline-block"/>
+        <p>支付宝打赏</p>
+      </div>
+    
+  </div>
+</div>
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/javascript/" rel="tag">#javascript</a>
+          
+            <a href="/tags/闭包/" rel="tag">#闭包</a>
+          
+            <a href="/tags/作用域/" rel="tag">#作用域</a>
+          
+            <a href="/tags/执行上下文/" rel="tag">#执行上下文</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/07/19/this/" rel="next" title="javascript中的this">
+                <i class="fa fa-chevron-left"></i> javascript中的this
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -416,6 +528,27 @@
 
 
           
+<div class="comments" id="comments">
+  
+  <div class="ds-thread" data-thread-key="2016/07/21/bibao/"
+           data-title="作用域，执行上下文，闭包" data-url="http://wangshiping.net/2016/07/21/bibao/"></div>
+
+  <!-- 多说评论框 end -->
+  <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+  <script type="text/javascript">  
+     var duoshuoQuery = {short_name:"wangshiping"};  
+      (function() {  
+        var ds = document.createElement('script');  
+        ds.type = 'text/javascript';ds.async = true;  
+        ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';  
+        ds.charset = 'UTF-8';  
+        (document.getElementsByTagName('head')[0]   
+         || document.getElementsByTagName('body')[0]).appendChild(ds);  
+      })();  
+  </script>
+  
+</div>
+
         </div>
         
           
@@ -433,7 +566,12 @@
       
 
         
-      <section class="site-overview sidebar-panel  sidebar-panel-active ">
+          <ul class="sidebar-nav motion-element">
+            <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >文章目录</li>
+            <li class="sidebar-nav-overview" data-target="site-overview">站点概览</li>
+          </ul>
+        
+      <section class="site-overview sidebar-panel ">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                  src="/images/default_avatar.jpg"
@@ -501,6 +639,17 @@
 
           
           
+      </section>
+      
+      <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+        <div class="post-toc">
+          
+                
+              
+              
+          <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#作用域"><span class="nav-number">1.</span> <span class="nav-text">作用域</span></a></li></ol></div>
+          
+        </div>
       </section>
       
     </div>
@@ -630,11 +779,9 @@
 
 
   
-  
-    <script type="text/javascript" id="motion.page.archive">
-      $('.archive-year').velocity('transition.slideLeftIn');
-    </script>
-  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
 
 
   
