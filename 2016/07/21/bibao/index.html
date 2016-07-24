@@ -90,7 +90,7 @@
 <meta property="og:description" content="javascript中最难理解和掌握的几个点，今天来总结一下：
 作用域
 作用域，编程语言里即指变量的作用域，通俗一点讲就是变量的作用范围，javascript 没有“块”级作用域，所谓“块”，就是指“{}” 括起来的部分。例如：if,for等语句大括号内的内容：">
-<meta property="og:updated_time" content="2016-07-21T16:57:52.230Z">
+<meta property="og:updated_time" content="2016-07-24T04:06:51.078Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="作用域，执行上下文，闭包">
 <meta name="twitter:description" content="javascript中最难理解和掌握的几个点，今天来总结一下：
@@ -447,7 +447,7 @@ function fn(x){
 }
 fn(10);
 console.log(b);
-</code></pre><p>来分析一下，这段代码执行时候的上下文环境：</p>
+</code></pre><p>来分析一下，这段代码执行时候的执行上下文环境变化：</p>
 <ul>
 <li>全局上下文环境，给 a、b 、this 赋值</li>
 <li>执行fn(10),创建 fn(10)的执行上下文，注意是<strong>fn(10)</strong> 的上下文环境，压栈,此时fn(10)的上下文环境为活跃的上下文环境、此环境下赋值a,d,x，this，f,直到执行f(10);</li>
@@ -459,6 +459,88 @@ console.log(b);
 <p>从以上的上下文分析可以看出：</p>
 <blockquote>
 <p>只有函数执行时才可以产生上下文，并且，一个函数可以产生多个执行上下文。<br>执行上下文在一般情况下执行完后，都会销毁，除非 接下来讲的“闭包”。</p>
+</blockquote>
+<h2 id="闭包"><a href="#闭包" class="headerlink" title="闭包"></a>闭包</h2><p>何为闭包？我们搜搜百度的定义，我觉得比较容易理解：</p>
+<blockquote>
+<p>闭包是指可以包含自由（未绑定到特定对象）变量的代码块；这些变量不是在这个代码块内或者任何全局上下文中定义的，而是在定义代码块的环境中定义（局部变量）。“闭包” 一词来源于以下两者的结合：要执行的代码块（由于自由变量被包含在代码块中，这些自由变量以及它们引用的对象没有被释放）和为自由变量提供绑定的计算环境（作用域）。</p>
+</blockquote>
+<p>很简单直接的定义，包含自由变量的代码块，自由变量，上面我们定义了，就是在作用域内，引用不是自身作用域的变量、而js中有独立作用域的代码块只有函数内部，故、这句话也可翻译为：<strong>函数内部引用了不是其自身作用域内的变量，而导致该变量所在作用域不能释放该变量，这就形成了一个闭包</strong></p>
+<p>定义看起来比较抽象，我们来看下闭包的两个应用：</p>
+<p>1、函数的返回值是一个函数：</p>
+<pre><code>var test=function(){
+    var a=10;
+    function b(){
+        console.log(++a);//每执行一次就会加一
+    }
+    return b;
+}();
+test();
+</code></pre><blockquote>
+<p>可以看到，每当我们执行一次，就会就会对a自增一次，这也是一个简单的计数器功能，<br>这就实现了，在全局环境下，可以访问，test内部变量的作用。</p>
+</blockquote>
+<p>我们在看一个例子：<br>一般在js的面向对象编程中，我们这样封装对象：</p>
+<pre><code>function Book(name,id){
+    this.name=name;
+    this.id=id;
+    this.__proto__.counts++;
+    this.getName=function(){
+        return this.name;
+    };
+    this.getId=function(){
+        return this.id;
+    };
+}
+Book.prototype={  
+    counts:0,
+    getCounts:function(){
+        this.counts;
+    },
+    description:function(){
+        console.log(&quot;this is the&quot;+this.counts+&quot;books&quot;);
+    }
+}
+var book=new Book();
+</code></pre><blockquote>
+<p>我们可以定义一个类，给他加上私有变量，对这些变量的访问，赋予特定的方法，通过扩展原型来添加公用的方法，加上共享变量counts、每次新生成一个book时，都会自增counts。</p>
+</blockquote>
+<p>我们看看闭包的实现：</p>
+<pre><code>var Book=function(){
+    var count=0;
+    var _book=function(name,id){
+        this.name=name;
+        this.id=id;
+        count++;
+    }
+    _book.prototype={
+        getName:function(){
+            return this.name;
+        },
+        getId:function(){
+            return this.id;
+        },
+        getCount:function(){
+            return count;
+        }
+    }
+    return _book;
+}();
+var book=new Book();
+</code></pre><blockquote>
+<p>可以看到，这样的写法更加好，我们可以控制，共享私有变量count的访问性,各自独有的私有变量如name、id 等的可访问性，而第一个例子count是每个对象都可以访问的。这个例子，对象是访问不到的。</p>
+</blockquote>
+<p>2、函数的参数是一个函数：</p>
+<pre><code>var a=10;
+var fun1=function(){
+    console.log(a);//10
+};
+(function(f){
+    var a=20;
+    f();
+})(fun1)
+</code></pre><p>这就是前面提到的自由变量的取值问题，这里也得到验证，fun1函数内部的a,取值还是定义时候作用域链上的a,那么留个问题：<br>如果在fun1里加上一句，<code>console.log(this)</code> 是会打印出什么呢？</p>
+<p><strong>后记</strong></p>
+<blockquote>
+<p>关于 this,作用域，执行上下文、闭包，这几个概念的理解和掌握其实是js中最容易混淆的，理解了这几个概念,js核心的几个概念你就搞清楚了，接下来就可以分析别人代码的逻辑了。不然有些时候你还真看不懂别人为啥要这么写，想当然的理解，然后半懂不懂。</p>
 </blockquote>
 
       
@@ -665,7 +747,7 @@ console.log(b);
                 
               
               
-          <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#作用域"><span class="nav-number">1.</span> <span class="nav-text">作用域</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#上下文环境"><span class="nav-number">2.</span> <span class="nav-text">上下文环境</span></a></li></ol></div>
+          <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#作用域"><span class="nav-number">1.</span> <span class="nav-text">作用域</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#上下文环境"><span class="nav-number">2.</span> <span class="nav-text">上下文环境</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#闭包"><span class="nav-number">3.</span> <span class="nav-text">闭包</span></a></li></ol></div>
           
         </div>
       </section>

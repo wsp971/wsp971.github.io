@@ -90,7 +90,7 @@ this 的取值我们分以下情况来讨论：
 <meta property="og:description" content="javascript 是一门灵活的语言，其中的this也是比较重要的知识点，现在这里归纳一下 javascript中的this，后面补几道题目，来加强一下认识：
 this 的取值我们分以下情况来讨论：
 构造函数中的thisjavascript中的构造函数就是用来new 特定对象的函数，因为es6之前,js都是没有class(类)的概念的，故看起来，js好像并没有创造对象的“类”，但，约定俗成的，有">
-<meta property="og:updated_time" content="2016-07-19T15:58:49.864Z">
+<meta property="og:updated_time" content="2016-07-24T02:40:21.655Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="javascript中的this">
 <meta name="twitter:description" content="javascript 是一门灵活的语言，其中的this也是比较重要的知识点，现在这里归纳一下 javascript中的this，后面补几道题目，来加强一下认识：
@@ -455,6 +455,10 @@ var wsp=new Student();
 wsp.getName();
 </code></pre><blockquote>
 <p>当然在整个原型链中，this,都指向 构造函数所创建的对象。</p>
+</blockquote>
+<p>最后总结一下：</p>
+<blockquote>
+<p>this 是一个动态的概念，他是在函数在执行的时候才会去赋值的，有js,提供的call、apply函数也可以看出，我们定义的每个方法，都可以灵活的用别的对象来调用。记住这一点。 </p>
 </blockquote>
 <hr>
 
