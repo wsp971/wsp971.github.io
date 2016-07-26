@@ -380,7 +380,8 @@
       
         
           
-            
+            <p>。。。。想好了题目，还未想好怎么写。囧。</p>
+
           
         
       
@@ -513,75 +514,12 @@
 
       
         
-          
-            <p>本篇想对js 中的原型做个透彻的分析与归纳，敬请看过来，首先我们从js 的数据类型说起：</p>
-<h2 id="js-中的数据类型"><a href="#js-中的数据类型" class="headerlink" title="js 中的数据类型"></a>js 中的数据类型</h2><blockquote>
-<p>js的数据类型分为 值类型和引用类型，我们先用js中的typeof来看看这些数据类型：</p>
-</blockquote>
-<pre><code>//值类型
-console.log(typeof(x));//undefined
-console.log(typeof(10));// number
-console.log(typeof(&quot;wsp&quot;));//string
-console.log(typeof(true));//boolean
-console.log(typeof(NaN));//number
-
-//引用类型
-console.log(typeof([1,2,3]));//object
-console.log(typeof(function(){}));//function
-console.log(typeof({a:1,b:3}));//object
-console.log(typeof(null));//object
-console.log(typeof (new Number(2)))//object
-</code></pre><blockquote>
-<p>仔细就会发现js的数据类型不外乎，就这些类型，上面的5中简单的，是js语言的基本类型，我们叫做值类型，下面的几个例字，就是js 语言的引用类型，无外乎就两种： function 和object ，这两种类型是我要分析的重点。</p>
-</blockquote>
-<h2 id="function-与-object"><a href="#function-与-object" class="headerlink" title="function 与 object"></a>function 与 object</h2><p>我们知道，在js中要创造一个对象，一般都会这样写：</p>
-<pre><code>var test1=new Object();//方式一
-var test2={a:1,b:2};//方式二
-typeof Object// function
-</code></pre><p>从<figure class="highlight plain"><figcaption><span>Object``` 的值来看，test1是直接用Object 这个函数来创建的,而后面直接用大括号括起来，其实本质上也可以归纳成方式一来创建：</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">```var test2=new Object(); test2.a=1;test2.b=2;</span><br></pre></td></tr></table></figure></p>
-<p>也就是说，js中的对象都可以通过 new 一个方法来进行创建。故我们可以归纳出一句话：<strong>js对象都是由函数创建的</strong></p>
-<p>接着，我们再看一段代码：我们看看函数的定义方式：</p>
-<pre><code>var fun1=function(){/*do some thing*/};//方式一
-function fun2(){/*do some thing*/ };//方式二
-var fun3 = new Function(&apos;var temp = 100; this.temp = 200; return temp + this.temp;&apos;); //方式三
-</code></pre><p>仔细一看就会发现，第三种好像有点怪，其实、前面两种是都可以转换成第三种的定义方式的、第三种不就是把前两种的 程序语句 拼接成字符串 生成的对象么？</p>
-<p>看到了么、看到了么、</p>
-<p>所以：<strong>js中所有的函数，都是一个对象</strong></p>
-<p>我们把两句加黑的话连起来读读看：</p>
-<blockquote>
-<p>js 对象都是由函数创建的。而js中所有的函数，都是一个对象</p>
-</blockquote>
-<p>是不是有点鸡生蛋，蛋生鸡的感觉。但我们可以发现，是的，所有对象都是由普通的函数创建，普通的函数都是由 <code>Function</code> 这个对象创建,这个对象就是js中内置的对象，他好像我们语言的根一样，我们记住就好。</p>
-<h2 id="原型"><a href="#原型" class="headerlink" title="原型"></a>原型</h2><p>理清楚了函数与对象之间的关系，我们来看看原型是什么东东：</p>
-<p>我们知道，对象是有函数创建，而这个创建对象的函数，一般我们叫做对象的构造函数，比如:</p>
-<pre><code>function Book(name,price){
-    this.name=name;
-    this.price=price;
-}
-console.log(Book.prototype);
-console.log(typeof(Book.prototype))
-</code></pre><img src="http://o6k660ytf.bkt.clouddn.com//image/prototype1.png">
-<blockquote>
-<p>如图所示，在创建一个函数的时候，默认的会给函数创建一个prototype 属性，这个属性是一个对象，这个对象就被称作 函数的原型。</p>
-</blockquote>
-<p>那么原型有什么作用呢？</p>
-<p>首先，js也是一个面向对象的高级语言，在es6之前，没有类的概念，也没有类似其他高级语言中的extend 关键字，故对象与对象之间的继承关系，我们是通过对象之间的原型链来进行继承的。比如：</p>
-<pre><code>Book.prototype={
-    getName:function(){
-        return this.name;
-    },
-    getPrice:function(zhekou){
-        return zhekou*this.price;
-    }
-}
-var book1=new Book(&quot;javascript设计模式&quot;,58);
-console.log(book1.getName());//javascript设计模式
-console.log(book1.getPrice());//58
-</code></pre><blockquote>
-<p>可以看到，book对象能够继承构造函数Book的原型方法。</p>
-</blockquote>
-
-          
+          <p>本篇想对js 中的原型做个透彻的分析与归纳，敬请看过来，首先我们从js 的数据类型说起：<br>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/07/24/prototype/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
         
       
     </div>

@@ -80,38 +80,17 @@
 
 
 
-<meta name="description" content="本篇想对js 中的原型做个透彻的分析与归纳，敬请看过来，首先我们从js 的数据类型说起：
-js 中的数据类型
-js的数据类型分为 值类型和引用类型，我们先用js中的typeof来看看这些数据类型：
-
-//值类型
-console.log(typeof(x));//undefined
-console.log(typeof(10));// number
-console.log(typeof(&amp;quot;">
+<meta name="description" content="本篇想对js 中的原型做个透彻的分析与归纳，敬请看过来，首先我们从js 的数据类型说起：">
 <meta property="og:type" content="article">
 <meta property="og:title" content="javascript中的原型">
 <meta property="og:url" content="http://wangshiping.net/2016/07/24/prototype/index.html">
 <meta property="og:site_name" content="王小王的小站">
-<meta property="og:description" content="本篇想对js 中的原型做个透彻的分析与归纳，敬请看过来，首先我们从js 的数据类型说起：
-js 中的数据类型
-js的数据类型分为 值类型和引用类型，我们先用js中的typeof来看看这些数据类型：
-
-//值类型
-console.log(typeof(x));//undefined
-console.log(typeof(10));// number
-console.log(typeof(&amp;quot;">
+<meta property="og:description" content="本篇想对js 中的原型做个透彻的分析与归纳，敬请看过来，首先我们从js 的数据类型说起：">
 <meta property="og:image" content="http://o6k660ytf.bkt.clouddn.com//image/prototype1.png">
-<meta property="og:updated_time" content="2016-07-26T15:48:30.614Z">
+<meta property="og:updated_time" content="2016-07-26T16:43:27.577Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="javascript中的原型">
-<meta name="twitter:description" content="本篇想对js 中的原型做个透彻的分析与归纳，敬请看过来，首先我们从js 的数据类型说起：
-js 中的数据类型
-js的数据类型分为 值类型和引用类型，我们先用js中的typeof来看看这些数据类型：
-
-//值类型
-console.log(typeof(x));//undefined
-console.log(typeof(10));// number
-console.log(typeof(&amp;quot;">
+<meta name="twitter:description" content="本篇想对js 中的原型做个透彻的分析与归纳，敬请看过来，首先我们从js 的数据类型说起：">
 <meta name="twitter:image" content="http://o6k660ytf.bkt.clouddn.com//image/prototype1.png">
 
 
@@ -397,7 +376,7 @@ console.log(typeof(&amp;quot;">
       
 
       
-        <p>本篇想对js 中的原型做个透彻的分析与归纳，敬请看过来，首先我们从js 的数据类型说起：</p>
+        <p>本篇想对js 中的原型做个透彻的分析与归纳，敬请看过来，首先我们从js 的数据类型说起：<br><a id="more"></a></p>
 <h2 id="js-中的数据类型"><a href="#js-中的数据类型" class="headerlink" title="js 中的数据类型"></a>js 中的数据类型</h2><blockquote>
 <p>js的数据类型分为 值类型和引用类型，我们先用js中的typeof来看看这些数据类型：</p>
 </blockquote>
@@ -407,7 +386,6 @@ console.log(typeof(10));// number
 console.log(typeof(&quot;wsp&quot;));//string
 console.log(typeof(true));//boolean
 console.log(typeof(NaN));//number
-
 //引用类型
 console.log(typeof([1,2,3]));//object
 console.log(typeof(function(){}));//function
@@ -421,7 +399,7 @@ console.log(typeof (new Number(2)))//object
 <pre><code>var test1=new Object();//方式一
 var test2={a:1,b:2};//方式二
 typeof Object// function
-</code></pre><p>从<figure class="highlight plain"><figcaption><span>Object``` 的值来看，test1是直接用Object 这个函数来创建的,而后面直接用大括号括起来，其实本质上也可以归纳成方式一来创建：</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">```var test2=new Object(); test2.a=1;test2.b=2;</span><br></pre></td></tr></table></figure></p>
+</code></pre><p>从 <code>typeof Object</code> 的值来看，test1是直接用Object 这个函数来创建的,而后面直接用大括号括起来，其实本质上也可以归纳成方式一来创建： <code>var test2=new Object(); test2.a=1;test2.b=2;</code>  </p>
 <p>也就是说，js中的对象都可以通过 new 一个方法来进行创建。故我们可以归纳出一句话：<strong>js对象都是由函数创建的</strong></p>
 <p>接着，我们再看一段代码：我们看看函数的定义方式：</p>
 <pre><code>var fun1=function(){/*do some thing*/};//方式一
@@ -436,7 +414,7 @@ var fun3 = new Function(&apos;var temp = 100; this.temp = 200; return temp + thi
 </blockquote>
 <p>是不是有点鸡生蛋，蛋生鸡的感觉。但我们可以发现，是的，所有对象都是由普通的函数创建，普通的函数都是由 <code>Function</code> 这个对象创建,这个对象就是js中内置的对象，他好像我们语言的根一样，我们记住就好。</p>
 <h2 id="原型"><a href="#原型" class="headerlink" title="原型"></a>原型</h2><p>理清楚了函数与对象之间的关系，我们来看看原型是什么东东：</p>
-<p>我们知道，对象是有函数创建，而这个创建对象的函数，一般我们叫做对象的构造函数，比如:</p>
+<p>我们知道，对象是由函数创建，而这个创建对象的函数，一般我们叫做对象的构造函数，比如:</p>
 <pre><code>function Book(name,price){
     this.name=name;
     this.price=price;
@@ -446,6 +424,15 @@ console.log(typeof(Book.prototype))
 </code></pre><img src="http://o6k660ytf.bkt.clouddn.com//image/prototype1.png">
 <blockquote>
 <p>如图所示，在创建一个函数的时候，默认的会给函数创建一个prototype 属性，这个属性是一个对象，这个对象就被称作 函数的原型。</p>
+</blockquote>
+<p>进一步我们再看 Book.prototype 有哪些属性？<br>如图，这个对象默认创建了两个属性：<code>constructor</code>  和 <code>__proto__</code> ，关于这两个属性，我们可以用以下两个语句来给出解答：</p>
+<pre><code>var book1=new Book(&quot;javascript权威指南&quot;,138);
+book.prototype.constructor===Book// true
+book1.__proto__===Book.prototype//true
+</code></pre><p>可以看懂这两个属性的含义了吗？</p>
+<blockquote>
+<p>对象的<strong>prototype</strong> 指向构造函数的原型对象，这个对象叫对象的隐形原型，这在后面的原型链我们再说。</p>
+<p>原型对象的constructor 指向构造函数</p>
 </blockquote>
 <p>那么原型有什么作用呢？</p>
 <p>首先，js也是一个面向对象的高级语言，在es6之前，没有类的概念，也没有类似其他高级语言中的extend 关键字，故对象与对象之间的继承关系，我们是通过对象之间的原型链来进行继承的。比如：</p>
@@ -461,8 +448,10 @@ var book1=new Book(&quot;javascript设计模式&quot;,58);
 console.log(book1.getName());//javascript设计模式
 console.log(book1.getPrice());//58
 </code></pre><blockquote>
-<p>可以看到，book对象能够继承构造函数Book的原型方法。</p>
+<p>可以看到，book对象能够继承构造函数Book的原型方法。这样就实现了两个对象之间的继承关系。不过要理清楚js 中所有对象的继承关系，还是要 分析下js中的继承链的。。</p>
 </blockquote>
+<hr>
+<p>未完待续。。。。</p>
 
       
     </div>
