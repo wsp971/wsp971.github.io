@@ -1,0 +1,951 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="javascript,原型," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="本篇想对js 中的原型做个透彻的分析与归纳，敬请看过来，首先我们从js 的数据类型说起：
+js 中的数据类型
+js的数据类型分为 值类型和引用类型，我们先用js中的typeof来看看这些数据类型：
+
+//值类型
+console.log(typeof(x));//undefined
+console.log(typeof(10));// number
+console.log(typeof(&amp;quot;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="javascript中的原型">
+<meta property="og:url" content="http://wangshiping.net/2016/07/24/prototype/index.html">
+<meta property="og:site_name" content="王小王的小站">
+<meta property="og:description" content="本篇想对js 中的原型做个透彻的分析与归纳，敬请看过来，首先我们从js 的数据类型说起：
+js 中的数据类型
+js的数据类型分为 值类型和引用类型，我们先用js中的typeof来看看这些数据类型：
+
+//值类型
+console.log(typeof(x));//undefined
+console.log(typeof(10));// number
+console.log(typeof(&amp;quot;">
+<meta property="og:image" content="http://o6k660ytf.bkt.clouddn.com//image/prototype1.png">
+<meta property="og:updated_time" content="2016-07-26T15:48:30.614Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="javascript中的原型">
+<meta name="twitter:description" content="本篇想对js 中的原型做个透彻的分析与归纳，敬请看过来，首先我们从js 的数据类型说起：
+js 中的数据类型
+js的数据类型分为 值类型和引用类型，我们先用js中的typeof来看看这些数据类型：
+
+//值类型
+console.log(typeof(x));//undefined
+console.log(typeof(10));// number
+console.log(typeof(&amp;quot;">
+<meta name="twitter:image" content="http://o6k660ytf.bkt.clouddn.com//image/prototype1.png">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"right","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+  <title> javascript中的原型 | 王小王的小站 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?7baaef084620042980c0777b359da41b";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+  <script type="text/javascript">
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//tajs.qq.com/stats?sId=56055856";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-right page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"> <i></i>
+      </span>
+      <span class="site-title">王小王的小站</span>
+      <span class="logo-line-after"> <i></i>
+      </span>
+    </a>
+  </div>
+  <p class="site-subtitle">蒹葭苍苍忆佳人</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+  <ul id="menu" class="menu">
+    
+        
+    <li class="menu-item menu-item-home">
+      <a href="/" rel="section">
+        
+        <i class="menu-item-icon fa fa-home fa-fw"></i>
+        <br />
+        
+        首页
+      </a>
+    </li>
+    
+        
+    <li class="menu-item menu-item-categories">
+      <a href="/categories" rel="section">
+        
+        <i class="menu-item-icon fa fa-th fa-fw"></i>
+        <br />
+        
+        分类
+      </a>
+    </li>
+    
+        
+    <li class="menu-item menu-item-about">
+      <a href="/about" rel="section">
+        
+        <i class="menu-item-icon fa fa-user fa-fw"></i>
+        <br />
+        
+        关于
+      </a>
+    </li>
+    
+        
+    <li class="menu-item menu-item-archives">
+      <a href="/archives" rel="section">
+        
+        <i class="menu-item-icon fa fa-archive fa-fw"></i>
+        <br />
+        
+        归档
+      </a>
+    </li>
+    
+        
+    <li class="menu-item menu-item-tags">
+      <a href="/tags" rel="section">
+        
+        <i class="menu-item-icon fa fa-tags fa-fw"></i>
+        <br />
+        
+        标签
+      </a>
+    </li>
+    
+        
+    <li class="menu-item menu-item-guitar">
+      <a href="/guitar" rel="section">
+        
+        <i class="menu-item-icon fa fa-music fa-fw"></i>
+        <br />
+        
+        吉他
+      </a>
+    </li>
+    
+        
+    <li class="menu-item menu-item-message">
+      <a href="/MessageBoard" rel="section">
+        
+        <i class="menu-item-icon fa fa-comments fa-fw"></i>
+        <br />
+        
+        留言板
+      </a>
+    </li>
+    
+
+      
+    </ul>
+    
+
+  
+  </nav> </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                javascript中的原型
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-07-24T12:22:24+08:00" content="2016-07-24">
+              2016-07-24
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/技术/" itemprop="url" rel="index">
+                    <span itemprop="name">技术</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/07/24/prototype/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/07/24/prototype/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+          <!-- 统计阅读量代码 -->
+        <!--   
+          &nbsp; | &nbsp;
+          <span id="/2016/07/24/prototype/"class="leancloud_visitors" data-flag-title="javascript中的原型">
+            &nbsp;阅读次数
+          </span>
+           -->
+          
+
+          
+          
+             <span id="/2016/07/24/prototype/" class="leancloud_visitors" data-flag-title="javascript中的原型">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>本篇想对js 中的原型做个透彻的分析与归纳，敬请看过来，首先我们从js 的数据类型说起：</p>
+<h2 id="js-中的数据类型"><a href="#js-中的数据类型" class="headerlink" title="js 中的数据类型"></a>js 中的数据类型</h2><blockquote>
+<p>js的数据类型分为 值类型和引用类型，我们先用js中的typeof来看看这些数据类型：</p>
+</blockquote>
+<pre><code>//值类型
+console.log(typeof(x));//undefined
+console.log(typeof(10));// number
+console.log(typeof(&quot;wsp&quot;));//string
+console.log(typeof(true));//boolean
+console.log(typeof(NaN));//number
+
+//引用类型
+console.log(typeof([1,2,3]));//object
+console.log(typeof(function(){}));//function
+console.log(typeof({a:1,b:3}));//object
+console.log(typeof(null));//object
+console.log(typeof (new Number(2)))//object
+</code></pre><blockquote>
+<p>仔细就会发现js的数据类型不外乎，就这些类型，上面的5中简单的，是js语言的基本类型，我们叫做值类型，下面的几个例字，就是js 语言的引用类型，无外乎就两种： function 和object ，这两种类型是我要分析的重点。</p>
+</blockquote>
+<h2 id="function-与-object"><a href="#function-与-object" class="headerlink" title="function 与 object"></a>function 与 object</h2><p>我们知道，在js中要创造一个对象，一般都会这样写：</p>
+<pre><code>var test1=new Object();//方式一
+var test2={a:1,b:2};//方式二
+typeof Object// function
+</code></pre><p>从<figure class="highlight plain"><figcaption><span>Object``` 的值来看，test1是直接用Object 这个函数来创建的,而后面直接用大括号括起来，其实本质上也可以归纳成方式一来创建：</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">```var test2=new Object(); test2.a=1;test2.b=2;</span><br></pre></td></tr></table></figure></p>
+<p>也就是说，js中的对象都可以通过 new 一个方法来进行创建。故我们可以归纳出一句话：<strong>js对象都是由函数创建的</strong></p>
+<p>接着，我们再看一段代码：我们看看函数的定义方式：</p>
+<pre><code>var fun1=function(){/*do some thing*/};//方式一
+function fun2(){/*do some thing*/ };//方式二
+var fun3 = new Function(&apos;var temp = 100; this.temp = 200; return temp + this.temp;&apos;); //方式三
+</code></pre><p>仔细一看就会发现，第三种好像有点怪，其实、前面两种是都可以转换成第三种的定义方式的、第三种不就是把前两种的 程序语句 拼接成字符串 生成的对象么？</p>
+<p>看到了么、看到了么、</p>
+<p>所以：<strong>js中所有的函数，都是一个对象</strong></p>
+<p>我们把两句加黑的话连起来读读看：</p>
+<blockquote>
+<p>js 对象都是由函数创建的。而js中所有的函数，都是一个对象</p>
+</blockquote>
+<p>是不是有点鸡生蛋，蛋生鸡的感觉。但我们可以发现，是的，所有对象都是由普通的函数创建，普通的函数都是由 <code>Function</code> 这个对象创建,这个对象就是js中内置的对象，他好像我们语言的根一样，我们记住就好。</p>
+<h2 id="原型"><a href="#原型" class="headerlink" title="原型"></a>原型</h2><p>理清楚了函数与对象之间的关系，我们来看看原型是什么东东：</p>
+<p>我们知道，对象是有函数创建，而这个创建对象的函数，一般我们叫做对象的构造函数，比如:</p>
+<pre><code>function Book(name,price){
+    this.name=name;
+    this.price=price;
+}
+console.log(Book.prototype);
+console.log(typeof(Book.prototype))
+</code></pre><img src="http://o6k660ytf.bkt.clouddn.com//image/prototype1.png">
+<blockquote>
+<p>如图所示，在创建一个函数的时候，默认的会给函数创建一个prototype 属性，这个属性是一个对象，这个对象就被称作 函数的原型。</p>
+</blockquote>
+<p>那么原型有什么作用呢？</p>
+<p>首先，js也是一个面向对象的高级语言，在es6之前，没有类的概念，也没有类似其他高级语言中的extend 关键字，故对象与对象之间的继承关系，我们是通过对象之间的原型链来进行继承的。比如：</p>
+<pre><code>Book.prototype={
+    getName:function(){
+        return this.name;
+    },
+    getPrice:function(zhekou){
+        return zhekou*this.price;
+    }
+}
+var book1=new Book(&quot;javascript设计模式&quot;,58);
+console.log(book1.getName());//javascript设计模式
+console.log(book1.getPrice());//58
+</code></pre><blockquote>
+<p>可以看到，book对象能够继承构造函数Book的原型方法。</p>
+</blockquote>
+
+      
+    </div>
+    
+    <div>
+      
+        
+      
+    </div>
+
+    <div>
+      
+        
+<div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center">
+  <div>生活窘迫，来了就赏点吧~~</div>
+  <button id="rewardButton", disable="enable", onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}", style="cursor: pointer; border: 0; outline: 0; border-radius: 100%; padding: 0; margin: 0; letter-spacing: normal; text-transform: none; text-indent: 0px; text-shadow: none">
+    <span onmouseover="this.style.color='rgb(236,96,0)';this.style.background='rgb(204,204,204)'" onMouseOut="this.style.color='#fff';this.style.background='rgb(236,96,0)'" style="display: inline-block; width: 70px; height: 70px; border-radius: 100%; line-height: 81px; color: #fff; font: 400 35px/75px 'microsofty'; background: rgb(236,96,0)">赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="http://o6k660ytf.bkt.clouddn.com//pay/weixinpay.jpg" alt="王小王sean WeChat Pay" style="width: 200px; max-width: 100%; display: inline-block"/>
+        <p>微信打赏</p>
+      </div>
+    
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="http://o6k660ytf.bkt.clouddn.com//pay/alipay.jpg" alt="王小王sean Alipay" style="width: 200px; max-width: 100%; display: inline-block"/>
+        <p>支付宝打赏</p>
+      </div>
+    
+  </div>
+</div>
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/javascript/" rel="tag">#javascript</a>
+          
+            <a href="/tags/原型/" rel="tag">#原型</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/07/21/bibao/" rel="next" title="作用域，执行上下文，闭包">
+                <i class="fa fa-chevron-left"></i> 作用域，执行上下文，闭包
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/07/24/extend/" rel="prev" title="在js中如何实现继承">
+                在js中如何实现继承 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+<div class="comments" id="comments">
+  
+  <div class="ds-thread" data-thread-key="2016/07/24/prototype/"
+           data-title="javascript中的原型" data-url="http://wangshiping.net/2016/07/24/prototype/"></div>
+
+  <!-- 多说评论框 end -->
+  <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+  <script type="text/javascript">  
+     var duoshuoQuery = {short_name:"wangshiping"};  
+      (function() {  
+        var ds = document.createElement('script');  
+        ds.type = 'text/javascript';ds.async = true;  
+        ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';  
+        ds.charset = 'UTF-8';  
+        (document.getElementsByTagName('head')[0]   
+         || document.getElementsByTagName('body')[0]).appendChild(ds);  
+      })();  
+  </script>
+  
+</div>
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+      
+
+        
+          <ul class="sidebar-nav motion-element">
+            <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >文章目录</li>
+            <li class="sidebar-nav-overview" data-target="site-overview">站点概览</li>
+          </ul>
+        
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+                 src="/images/default_avatar.jpg"
+                 alt="王小王sean" />
+          <p class="site-author-name" itemprop="name">王小王sean</p>
+          <p class="site-description motion-element" itemprop="description">自由，该向何处。</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">16</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+          
+          <div class="site-state-item site-state-categories">
+            
+            <a href="/categories">
+              
+              <span class="site-state-item-count">2</span>
+              <span class="site-state-item-name">分类</span>
+              
+            </a>
+            
+          </div>
+          
+
+            
+          <div class="site-state-item site-state-tags">
+            
+            <a href="/tags">
+              
+              <span class="site-state-item-count">22</span>
+              <span class="site-state-item-name">标签</span>
+              
+            </a>
+            
+          </div>
+          
+        </nav>
+        
+        <div class="links-of-author motion-element">
+          
+              
+          <span class="links-of-author-item">
+            <a href="http://weibo.com/u/5815414913?is_all=1" target="_blank" title="Weibo">
+               <i class="fa fa-weibo"></i>
+              
+                    Weibo
+            </a>
+          </span>
+          
+          <span class="links-of-author-item">
+            <a href="https://github.com/wsp971/" target="_blank" title="GitHub">
+               <i class="fa fa-github"></i>
+              
+                    GitHub
+            </a>
+          </span>
+          
+            
+        </div>
+        
+          
+
+          
+          
+      </section>
+      
+      <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+        <div class="post-toc">
+          
+                
+              
+              
+          <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#js-中的数据类型"><span class="nav-number">1.</span> <span class="nav-text">js 中的数据类型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#function-与-object"><span class="nav-number">2.</span> <span class="nav-text">function 与 object</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#原型"><span class="nav-number">3.</span> <span class="nav-text">原型</span></a></li></ol></div>
+          
+        </div>
+      </section>
+      
+    </div>
+
+
+  </aside>
+  <!-- 音乐模块开始 -->
+ <aside id="musicbar" class="sidebar" style="margin-top: 10px; display: block;"> 
+    <div class="sidebar-inner" style="padding:0px;">
+      <section class="site-overview sidebar-panel  sidebar-panel-active ">
+        
+        
+          
+            
+               <p style="padding-left:5px;margin:0px;"><i class="menu-item-icon fa fa-music fa-fw"></i>音乐盒</p>
+               <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=280 height=52 src="http://music.163.com/outchain/player?type=1&id=14947&auto=1&height=32"></iframe>
+            
+        
+      </section>
+    </div>
+  </aside>
+ 
+
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+<div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">王小王sean</span>
+</div>
+<span id="busuanzi_container_site_pv">
+    本站总访问量<span id="busuanzi_value_site_pv"></span>次
+</span>
+<span id="busuanzi_container_site_uv">
+  本站访客数<span id="busuanzi_value_site_uv"></span>人次
+</span>
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"wangshiping"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+      
+      <script src="/vendors/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+      <script src="/js/src/hook-duoshuo.js"></script>
+    
+  
+
+
+
+
+
+  
+  
+  
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("Ypm2bpziM6K8MQzeCOwOIsh5-gzGzoHsz", "C2onfFr7kBaAxb3SYKJsww8P");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+<script type="text/javascript" async src="//push.zhanzhang.baidu.com/push.js">
+</script>
+
+
+</body>
+</html>
