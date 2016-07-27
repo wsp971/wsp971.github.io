@@ -64,7 +64,7 @@
 <link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="javascript,原型," />
+  <meta name="keywords" content="javascript,原型,原型链," />
 
 
 
@@ -87,7 +87,11 @@
 <meta property="og:site_name" content="王小王的小站">
 <meta property="og:description" content="本篇想对js 中的原型做个透彻的分析与归纳，敬请看过来，首先我们从js 的数据类型说起：">
 <meta property="og:image" content="http://o6k660ytf.bkt.clouddn.com//image/prototype1.png">
-<meta property="og:updated_time" content="2016-07-26T16:43:27.577Z">
+<meta property="og:image" content="http://o6k660ytf.bkt.clouddn.com/image/prototype2.png">
+<meta property="og:image" content="http://o6k660ytf.bkt.clouddn.com/image/prototype7.png">
+<meta property="og:image" content="http://o6k660ytf.bkt.clouddn.com/image/prototype4.png">
+<meta property="og:image" content="http://o6k660ytf.bkt.clouddn.com/image/prototype6.png">
+<meta property="og:updated_time" content="2016-07-27T09:44:29.975Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="javascript中的原型">
 <meta name="twitter:description" content="本篇想对js 中的原型做个透彻的分析与归纳，敬请看过来，首先我们从js 的数据类型说起：">
@@ -450,8 +454,58 @@ console.log(book1.getPrice());//58
 </code></pre><blockquote>
 <p>可以看到，book对象能够继承构造函数Book的原型方法。这样就实现了两个对象之间的继承关系。不过要理清楚js 中所有对象的继承关系，还是要 分析下js中的继承链的。。</p>
 </blockquote>
-<hr>
-<p>未完待续。。。。</p>
+<h2 id="instanceof关键字与原型链"><a href="#instanceof关键字与原型链" class="headerlink" title="instanceof关键字与原型链"></a>instanceof关键字与原型链</h2><p>我们知道，在判断值类型时，我们可以用 <code>typeof</code> 关键字来判断，但是在判断引用类型时，这个关键字就没有办法区别引用类型了，故js 提供了另一个关键字 <code>instanceof</code> ,用法就是 <code>a instanceof A</code> 用来判断 a是否是A创建的对象，下面我们写几个看看：</p>
+<pre><code>book instanceof Book                    // true
+Book instanceof Object                  // true
+Book instanceof Function                // true
+Function instanceof Object              // true
+Object instanceof Function              // true
+Function.prototype instanceof Object    // true
+Function instanceof Function            // true
+Object instanceof Object                // true
+</code></pre><p>前几个，我们可以很容易理解，后面的是不是就看懵了？一开始，我也是这样的。囧、为了看懂这些不可思议的运行结果。那么是时候引出<strong>原型链</strong> 了。</p>
+<p>我们在分析原型这一小节时，已经做过总结：</p>
+<blockquote>
+<p>每个对象，都是由对应的构造函数创建，构造函数创建、对象的<code>__protot__</code>属性指向构造函数的原型对象</p>
+</blockquote>
+<img src="http://o6k660ytf.bkt.clouddn.com/image/prototype2.png">
+<p>如图，我们可以看到，book是Book的对象 我们可以可以用 <code>book instanceof Book</code> 来做判断，但从图中，我们是否也发现规律？</p>
+<blockquote>
+<p>1、对象a的<code>__proto__</code>  属性 和构造函数A的 <code>prototype</code> 指向同一个对象时，这是 <code>a instanceof A</code>  为 true</p>
+<p>2、对象a 的<strong>proto</strong>指向，或者其指向的对象的<strong>proto</strong>不停递归查找，直到能够在这条链上找到其指向对象为A的prototype指向的对象</p>
+</blockquote>
+<p>我们画个完整的图，来解释前面几个不可思议的 运行结果：</p>
+<img src="http://o6k660ytf.bkt.clouddn.com/image/prototype7.png">
+<p>我们根据上面的第二条规律，逐一分析下这几个结果：</p>
+<ul>
+<li><p><code>Book instanceof Object</code> 如上图、我们可以看到 <code>BooK.__proto__.__proto__===Object.prototype</code> </p>
+</li>
+<li><p><code>Book instanceof Function</code> 如上图、我们可以看到 <code>Book.__proto__===Function.prototype</code> </p>
+</li>
+<li><p><code>Function instanceof Object</code> 如上图、我们可以看到 <code>Function.__proto__.__proto__===Function.prototype</code> </p>
+</li>
+<li><p><code>Function instanceof Function</code> 如上图、我们可以看到 <code>Function.__proto__===Function.prototype</code> </p>
+</li>
+<li><p><code>Object instanceof Object</code> 如上图、我们如上图、我们可以看到 <code>Object.__proto__.__proto__.__proto__===Object.paototype</code> </p>
+</li>
+<li><p><code>Function.prototype instanceof Object</code> 如上图、我们可以看到 <code>Function.prototype.__proto__==Object.prototype</code> </p>
+</li>
+</ul>
+<p>注意上图的两个重难点：</p>
+<ul>
+<li><p><strong>所有对象或函数，其_ <code>_proto__</code> 都会指向到<code>Object.prototype</code> ,而<code>Object.prototype.__proto__</code> 指向<code>null</code> </strong></p>
+</li>
+<li><p><strong><code>Function.prototype===Function.__proto__</code> ，也就是说<code>Function</code>是由其自身创建的，这是比较奇怪的地方。</strong></p>
+</li>
+</ul>
+<h2 id="原型链的应用"><a href="#原型链的应用" class="headerlink" title="原型链的应用"></a>原型链的应用</h2><p>js最基本的应用,判断一个对象是否是自身属性还是继承属性，我们用 object.hasOwnPorperty(key),来进行判断。例如：</p>
+<pre><code>book.hasOwnProperty(&quot;name&quot;)//true
+</code></pre><p>可是构造函数和构造函数的原型对象里声明这个方法，为什么还可以调用，他继承自哪呢？我们看下图：</p>
+<img src="http://o6k660ytf.bkt.clouddn.com/image/prototype4.png">
+<p>是的，<code>Book.prototype</code>中的确是没有这个方法的，但是，<code>Book.prototype.__proto__</code> 中，我们看到了是吧。我们再看一张图：</p>
+<img src="http://o6k660ytf.bkt.clouddn.com/image/prototype6.png">
+<p>可以看到，<code>Book.__proto__.__proto__</code> 也就是<code>Function.prototype.__proto__</code> 也就是 <code>Object.prototype</code> 定义的这个方法，然后顺着这条链，继承了这个方法。</p>
+<p>后记：啰啰嗦嗦终于写完了，不知道写清楚了没？这个地方理清楚的确是需要花点时间的。</p>
 
       
     </div>
@@ -496,6 +550,8 @@ console.log(book1.getPrice());//58
             <a href="/tags/javascript/" rel="tag">#javascript</a>
           
             <a href="/tags/原型/" rel="tag">#原型</a>
+          
+            <a href="/tags/原型链/" rel="tag">#原型链</a>
           
         </div>
       
@@ -614,7 +670,7 @@ console.log(book1.getPrice());//58
             
             <a href="/tags">
               
-              <span class="site-state-item-count">22</span>
+              <span class="site-state-item-count">23</span>
               <span class="site-state-item-name">标签</span>
               
             </a>
@@ -657,7 +713,7 @@ console.log(book1.getPrice());//58
                 
               
               
-          <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#js-中的数据类型"><span class="nav-number">1.</span> <span class="nav-text">js 中的数据类型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#function-与-object"><span class="nav-number">2.</span> <span class="nav-text">function 与 object</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#原型"><span class="nav-number">3.</span> <span class="nav-text">原型</span></a></li></ol></div>
+          <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#js-中的数据类型"><span class="nav-number">1.</span> <span class="nav-text">js 中的数据类型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#function-与-object"><span class="nav-number">2.</span> <span class="nav-text">function 与 object</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#原型"><span class="nav-number">3.</span> <span class="nav-text">原型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#instanceof关键字与原型链"><span class="nav-number">4.</span> <span class="nav-text">instanceof关键字与原型链</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#原型链的应用"><span class="nav-number">5.</span> <span class="nav-text">原型链的应用</span></a></li></ol></div>
           
         </div>
       </section>
