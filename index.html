@@ -379,117 +379,12 @@
 
       
         
-          
-            <p>前一段时间在写过一个mvc的控制器，其中有用到了一个类怎么扩展和继承另一个类的场景、后来阅读了下书籍，看到了各种各样的继承，在此总结一下，js<br>中常见的继承方式：</p>
-<h2 id="类式继承"><a href="#类式继承" class="headerlink" title="类式继承"></a>类式继承</h2><pre><code>//声明父类
-function SuperClass(){
-    this.superValue=true;
-}
-//父类原型
-SuperClass.prototype.getSuperValue=function(){
-    return this.superValue;
-}
-//子类
-function SubClass(){
-    this.subValue=false;
-}
-//通过子类原型实例化为父类实例对象来进行继承
-SubClass.prototype=new SuperClass();
-//扩展子类原型
-SubClass.prototype.getSubValue=function(){
-    return this.subValue;
-}
-//
-var instance=new SubClass();
-console.log(instance instanceof SubClass);//true
-console.log(instance instanceof SuperClass);//true
-instance.getSuperValue();//true
-instance.getSubValue();//false
-</code></pre><blockquote>
-<p>可以看到，这种继承的原理就是子类的原型是父类的一个实例化对象，也就是子类原型的 <code>__proto__</code> 会指向父类的原型，根据原型链原理，子类是可以访问到父类方法的.</p>
-</blockquote>
-<p>但这种继承有个问题，就是父类的引用变量会变成共享的。我们看看下面代码：</p>
-<pre><code>function SuperClass(){
-    this.superValue=true;
-    this.book=[&quot;javascript&quot;,&quot;java&quot;];//给父类加上引用类型的变量book
-}
-var instance1=new SubClass();
-var instance2=new SubClass();
-console.log(instance1.book);//[&quot;javascript&quot;, &quot;java&quot;]
-console.log(instance2.book);// [&quot;javascript&quot;, &quot;java&quot;]
-instance1.book.push(&quot;html&quot;);
-console.log(instance1.book);//[&quot;javascript&quot;, &quot;java&quot;, &quot;html&quot;]
-console.log(instance2.book);//[&quot;javascript&quot;, &quot;java&quot;, &quot;html&quot;]
-</code></pre><p>看到了吗？在instance1 中改变了book变量，instance2的book变量也跟着改变了。但是值类型的变量不会是共享变量，为什么？你想一想引用类型和值类型的存储区别就知道了。<br>既然，类式继承是有缺陷的，那么我们介绍一下下一种继承：构造函数式继承。</p>
-<h2 id="构造函数式继承"><a href="#构造函数式继承" class="headerlink" title="构造函数式继承"></a>构造函数式继承</h2><pre><code>//父类
-function SuperClass(){
-    this.book=[&apos;java&apos;,&apos;javascript&apos;];
-}
-//父类原型方法
-SuperClass.prototype.showBook=function(){
-    console.log(this.book);
-}
-//子类
-function SubClass(){
-    //通过call函数执行父类构造函数方法
-    SuperClass.call(this);
-}
-var instance1=new SubClass();
-var instance2=new SubClass();
-instance1.book.push(&quot;html&amp;css&quot;);
-console.log(instance1.book);// [&quot;java&quot;, &quot;javascript&quot;, &quot;html&amp;css&quot;]
-console.log(instance2.book);//[&quot;java&quot;, &quot;javascript&quot;]
-instance1.showBook();// Uncaught TypeError: instance1.showBook is not a function
-</code></pre><blockquote>
-<p>可以看到，构造函数式继承可以通过在子类中通过call函数来改变父类构造函数的执行上下文和this，来构造子类对象，显然，子类的每一个对象都创建了一个自己的对象，所以不会出现类式继承的引用变量共享的问题，不过这样的构造却引来了新的问题，子类是继承不了父类对象的原型方法的。 你看 <code>instance1.showBook()</code> 就报错是吧。</p>
-</blockquote>
-<p>既然，这个构造函数式继承也有问题，但我们发现，上面两种继承的缺陷是可以互补的对么，于是我们有了思路，两种继承”混搭”一下，不就好了？</p>
-<h2 id="组合继承"><a href="#组合继承" class="headerlink" title="组合继承"></a>组合继承</h2><pre><code>function SuperClass(name){
-    this.name=name;
-    this.book=[&quot;java&quot;,&quot;javascript&quot;];
-}
-SuperClass.prototype={
-    getName:function(){
-        console.log(this.name);
-    },
-    showBook:function(){
-        console.log(this.book);
-    }
-}
-function SubClass (name,time){
-    SuperClass.call(this,name);
-    this.time=time;
-}
-SubClass.prototype=new SuperClass();
-SubClass.prototype.getTime=function(){
-    console.log(this.time);
-}
-var instance1=new SubClass(&quot;wsp&quot;,2016);
-var instance2=new SubClass(&quot;wsp&quot;,2016);
-instance1.book.push(&quot;html&amp;css&quot;);
-instance1.showBook();//[&quot;java&quot;, &quot;javascript&quot;, &quot;html&amp;css&quot;]
-instance2.showBook();//[&quot;java&quot;, &quot;javascript&quot;]
-instance2.getName();//wsp
-instance2.getTime();//2016
-</code></pre><blockquote>
-<p>可以看到组合式继承 既可以实现类式继承的原型方法继承，也可以实现父类引用对象的不共用继承，看起来好像是比较完美了。不过。。你发现了么？在整个继承过程中，父类的构造函数实际上是执行了两遍，那么。。是不是还可以改进？好吧，前人已经总结过了，我们继续介绍一下：</p>
-</blockquote>
-<h2 id="原型式继承"><a href="#原型式继承" class="headerlink" title="原型式继承"></a>原型式继承</h2><pre><code>function inheritObject(o){
-    function f(){};
-    f.prototype=o;
-    return new f();
-}
-var book={
-    name:&quot;js book&quot;,
-    alikeBook:[&quot;css book&quot;,&quot;html book&quot;]
-}
-var newBook=inheritObject(book);
-var newBook1=inheritObject(book);
-newBook.alikeBook.push(&quot;js Book&quot;);
-console.log(newBook.alikeBook);//[&quot;css book&quot;, &quot;html book&quot;, &quot;js Book&quot;]
-console.log(newBook1.alikeBook);//[&quot;css book&quot;, &quot;html book&quot;, &quot;js Book&quot;]
-</code></pre>
-          
+          <p>前一段时间在写过一个mvc的控制器，其中有用到了一个类怎么扩展和继承另一个类的场景、后来阅读了下书籍，看到了各种各样的继承，在此总结一下，js中常见的继承方式：<br>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/07/24/extend/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
         
       
     </div>
