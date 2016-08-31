@@ -94,7 +94,7 @@
 <meta property="og:image" content="http://o6k660ytf.bkt.clouddn.com/interval2.png">
 <meta property="og:image" content="http://o6k660ytf.bkt.clouddn.com/interval3.png">
 <meta property="og:image" content="http://o6k660ytf.bkt.clouddn.com/interval4.png">
-<meta property="og:updated_time" content="2016-08-31T02:30:54.893Z">
+<meta property="og:updated_time" content="2016-08-31T02:32:30.562Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="setInterval 与 setTimeout">
 <meta name="twitter:description" content="前几日去面试了一次，其中有用到 setInterval  实现定时任务。大体的问法流程见下面对话：
@@ -399,8 +399,10 @@
       
         <p>前几日去面试了一次，其中有用到 <code>setInterval</code>  实现定时任务。大体的问法流程见下面对话：</p>
 <blockquote>
-<p>我： 这个功能可以用setInterval 实现。。<br> 面试官： 可不可以用其他方法<br> 我：可以用setTimeout 来实现<br> 面试官： 怎么实现？<br> 我：递归啊。。巴拉巴拉。。。<br> 面试官：这两个有什么区别？setTimeout的执行原理是什么？<br> 我：。。。胡说了半天。。算了承认吧 。臣妾说不上啊。。over!<br><a id="more"></a><br>好吧，我来查资料，总结一下。 </p>
+<p>我： 这个功能可以用setInterval 实现。。<br> 面试官： 可不可以用其他方法<br> 我：可以用setTimeout 来实现<br> 面试官： 怎么实现？<br> 我：递归啊。。巴拉巴拉。。。<br> 面试官：这两个有什么区别？setTimeout的执行原理是什么？<br> 我：。。。胡说了半天。。算了承认吧 。臣妾说不上啊。。over!</p>
 </blockquote>
+<a id="more"></a>
+<p>好吧，我来查资料，总结一下。 </p>
 <h2 id="setTimeout-和-setInterval-来自哪里？"><a href="#setTimeout-和-setInterval-来自哪里？" class="headerlink" title="setTimeout 和 setInterval 来自哪里？"></a>setTimeout 和 setInterval 来自哪里？</h2><p><code>setTimeout</code> 和<code>setInterval</code>  方法都是浏览器对象，即BOM提供的方法。这两个方法分别用来进行延时执行，和设置时间间隔执行代码。</p>
 <h2 id="setTimeout-与-setInterval-的用法"><a href="#setTimeout-与-setInterval-的用法" class="headerlink" title="setTimeout 与 setInterval 的用法"></a><code>setTimeout</code> 与 <code>setInterval</code> 的用法</h2><p>setTimeout用来对代码进行一个延时执行，定义为：</p>
 <pre><code>window.setTimeout(&quot;javascript function&quot;,milliseconds);
