@@ -64,7 +64,7 @@
 <link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="javascript,bom," />
 
 
 
@@ -80,15 +80,25 @@
 
 
 
-<meta name="description" content="自由，该向何处。">
-<meta property="og:type" content="website">
-<meta property="og:title" content="王小王的小站">
-<meta property="og:url" content="http://wangshiping.net/tags/设计模式/index.html">
+<meta name="description" content="什么是BOM
+由于现代浏览器实现了javascript 交互方面的相同方法和属性，但浏览器对象没有正式标准
+
+Window 对象">
+<meta property="og:type" content="article">
+<meta property="og:title" content="浏览器对象模型（browser Object model）">
+<meta property="og:url" content="http://wangshiping.net/2016/08/23/bom/index.html">
 <meta property="og:site_name" content="王小王的小站">
-<meta property="og:description" content="自由，该向何处。">
+<meta property="og:description" content="什么是BOM
+由于现代浏览器实现了javascript 交互方面的相同方法和属性，但浏览器对象没有正式标准
+
+Window 对象">
+<meta property="og:updated_time" content="2016-08-31T02:30:14.300Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="王小王的小站">
-<meta name="twitter:description" content="自由，该向何处。">
+<meta name="twitter:title" content="浏览器对象模型（browser Object model）">
+<meta name="twitter:description" content="什么是BOM
+由于现代浏览器实现了javascript 交互方面的相同方法和属性，但浏览器对象没有正式标准
+
+Window 对象">
 
 
 
@@ -106,7 +116,7 @@
   };
 </script>
 
-  <title> 标签: 设计模式 | 王小王的小站 </title>
+  <title> 浏览器对象模型（browser Object model） | 王小王的小站 </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -147,7 +157,7 @@
     
   
 
-  <div class="container one-collumn sidebar-position-right  ">
+  <div class="container one-collumn sidebar-position-right page-post-detail ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -271,46 +281,272 @@
           <div id="content" class="content">
             
 
-  <div id="posts" class="posts-collapse">
-    <div class="collection-title">
-      <h2 >
-        设计模式
-        <small>标签</small>
-      </h2>
-    </div>
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
 
     
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                浏览器对象模型（browser Object model）
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-08-23T10:35:47+08:00" content="2016-08-23">
+              2016-08-23
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/技术/" itemprop="url" rel="index">
+                    <span itemprop="name">技术</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/08/23/bom/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/08/23/bom/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+          <!-- 统计阅读量代码 -->
+        <!--   
+          &nbsp; | &nbsp;
+          <span id="/2016/08/23/bom/"class="leancloud_visitors" data-flag-title="浏览器对象模型（browser Object model）">
+            &nbsp;阅读次数
+          </span>
+           -->
+          
+
+          
+          
+             <span id="/2016/08/23/bom/" class="leancloud_visitors" data-flag-title="浏览器对象模型（browser Object model）">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
       
 
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+      
+        <h3 id="什么是BOM"><a href="#什么是BOM" class="headerlink" title="什么是BOM"></a>什么是BOM</h3><blockquote>
+<p>由于现代浏览器实现了javascript 交互方面的相同方法和属性，但浏览器对象没有正式标准</p>
+</blockquote>
+<h3 id="Window-对象"><a href="#Window-对象" class="headerlink" title="Window 对象"></a>Window 对象</h3><a id="more"></a>
+<p>所有浏览器都支持window 对象，表示浏览器窗口，所有javascript 全局对象，变量 函数，均为window对象的成员</p>
+<p>html 的 dom  根节点 document 对象也是 window 的成员 即 window.document===document</p>
+<h3 id="window-的尺寸（浏览器的视图窗口，不包含工具栏和滚动条）"><a href="#window-的尺寸（浏览器的视图窗口，不包含工具栏和滚动条）" class="headerlink" title="window 的尺寸（浏览器的视图窗口，不包含工具栏和滚动条）"></a>window 的尺寸（浏览器的视图窗口，不包含工具栏和滚动条）</h3><p>对于 Internet Explorer、Chrome、Firefox、Opera 以及 Safari 浏览器 </p>
+<ul>
+<li>window.innerHeight - 浏览器窗口的内部高度</li>
+<li>window.innerWidth - 浏览器窗口的内部宽度</li>
+</ul>
+<p>对于 Internet Explorer 8</p>
+<pre><code>document.documentElement.clientHeight
+document.documentElement.clientWidth
+</code></pre><p>兼容写法</p>
+<pre><code>var w=window.innerWidth
+|| document.documentElement.clientWidth
+|| document.body.clientWidth;
 
-      <h1 class="post-title">
-        
-            <a class="post-title-link" href="/2016/07/24/extend/" itemprop="url">
-              
-                <span itemprop="name">javascript中如何实现继承</span>
-              
-            </a>
-        
-      </h1>
+var h=window.innerHeight
+|| document.documentElement.clientHeight
+|| document.body.clientHeight;
+</code></pre><blockquote>
+<p>document.body.clientHeight||clientWidth 在现代浏览器中表示的是 body 的宽度和高度</p>
+</blockquote>
+<h3 id="window-screen-对象"><a href="#window-screen-对象" class="headerlink" title="window.screen 对象"></a>window.screen 对象</h3><blockquote>
+<p>包含用户屏幕的信息</p>
+</blockquote>
+<pre><code>screen.availWidth // 屏幕可用宽度
+screen.availHeight //屏幕 可用高度
+</code></pre><h3 id="Navigate对象"><a href="#Navigate对象" class="headerlink" title="Navigate对象"></a>Navigate对象</h3><p>navigate对象包含了浏览器和浏览器所在桌面的相关信息。主要有以下属性：</p>
+<table>
+<thead>
+<tr>
+<th>属性</th>
+<th>解释</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>appName</td>
+<td>web浏览器全称。 如：“microsoft Internet Explorer” “Netscape”</td>
+</tr>
+<tr>
+<td>appVersion</td>
+<td>数字开头，包含浏览器厂商和版本信息</td>
+</tr>
+<tr>
+<td>appCodeName</td>
+<td>浏览器先关的内部代码名，都为 Mozilla</td>
+</tr>
+<tr>
+<td>userAgent</td>
+<td>浏览器在她的 USER-AGENT HTTP头部中发送的字符串</td>
+</tr>
+<tr>
+<td>platform</td>
+<td>浏览器所在的操作系统</td>
+</tr>
+<tr>
+<td>onLine</td>
+<td>匹配任何非空白字符。</td>
+</tr>
+<tr>
+<td>cookieEnabled</td>
+<td>cookie 是否可用</td>
+</tr>
+<tr>
+<td>plugins</td>
+<td>浏览器插件集合</td>
+</tr>
+<tr>
+<td>language</td>
+<td>浏览器语言，ie不支持</td>
+</tr>
+<tr>
+<td>userLanguage</td>
+<td>浏览器首选语言,IE支持 为“zh-cn”</td>
+</tr>
+<tr>
+<td>systemLanguage</td>
+<td>系统语言,IE支持 为“zh-cn”</td>
+</tr>
+</tbody>
+</table>
+<h3 id="cookies"><a href="#cookies" class="headerlink" title="cookies"></a>cookies</h3><p>cookie 是存储于访问者计算机中的变量，当计算机通过浏览器请求某个页面时，就会附带着cookie过来到服务器。通过js 可以访问，并且设定cookie 的值，cookie是下挂在document对象下的属性。一般通过设置key/value的方式设置</p>
+<pre><code>function setCookie(key,value,expire){
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2016-07-24T12:22:35+08:00"
-              content="2016-07-24" >
-          07-24
-        </time>
+}
+</code></pre>
+      
+    </div>
+    
+    <div>
+      
+        
+      
+    </div>
+
+    <div>
+      
+        
+<div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center">
+  <div>生活窘迫，来了就赏点吧~~</div>
+  <button id="rewardButton", disable="enable", onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}", style="cursor: pointer; border: 0; outline: 0; border-radius: 100%; padding: 0; margin: 0; letter-spacing: normal; text-transform: none; text-indent: 0px; text-shadow: none">
+    <span onmouseover="this.style.color='rgb(236,96,0)';this.style.background='rgb(204,204,204)'" onMouseOut="this.style.color='#fff';this.style.background='rgb(236,96,0)'" style="display: inline-block; width: 70px; height: 70px; border-radius: 100%; line-height: 81px; color: #fff; font: 400 35px/75px 'microsofty'; background: rgb(236,96,0)">赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="http://o6k660ytf.bkt.clouddn.com//pay/weixinpay.jpg" alt="王小王sean WeChat Pay" style="width: 200px; max-width: 100%; display: inline-block"/>
+        <p>微信打赏</p>
       </div>
+    
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="http://o6k660ytf.bkt.clouddn.com//pay/alipay.jpg" alt="王小王sean Alipay" style="width: 200px; max-width: 100%; display: inline-block"/>
+        <p>支付宝打赏</p>
+      </div>
+    
+  </div>
+</div>
 
-    </header>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/javascript/" rel="tag">#javascript</a>
+          
+            <a href="/tags/bom/" rel="tag">#bom</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/08/18/setInterval/" rel="next" title="setInterval 与 setTimeout">
+                <i class="fa fa-chevron-left"></i> setInterval 与 setTimeout
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </article>
 
 
-    
-  </div>
 
-  
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -318,6 +554,27 @@
 
 
           
+<div class="comments" id="comments">
+  
+  <div class="ds-thread" data-thread-key="2016/08/23/bom/"
+           data-title="浏览器对象模型（browser Object model）" data-url="http://wangshiping.net/2016/08/23/bom/"></div>
+
+  <!-- 多说评论框 end -->
+  <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+  <script type="text/javascript">  
+     var duoshuoQuery = {short_name:"wangshiping"};  
+      (function() {  
+        var ds = document.createElement('script');  
+        ds.type = 'text/javascript';ds.async = true;  
+        ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';  
+        ds.charset = 'UTF-8';  
+        (document.getElementsByTagName('head')[0]   
+         || document.getElementsByTagName('body')[0]).appendChild(ds);  
+      })();  
+  </script>
+  
+</div>
+
         </div>
         
           
@@ -335,7 +592,12 @@
       
 
         
-      <section class="site-overview sidebar-panel  sidebar-panel-active ">
+          <ul class="sidebar-nav motion-element">
+            <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >文章目录</li>
+            <li class="sidebar-nav-overview" data-target="site-overview">站点概览</li>
+          </ul>
+        
+      <section class="site-overview sidebar-panel ">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                  src="/images/default_avatar.jpg"
@@ -403,6 +665,17 @@
 
           
           
+      </section>
+      
+      <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+        <div class="post-toc">
+          
+                
+              
+              
+          <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#什么是BOM"><span class="nav-number">1.</span> <span class="nav-text">什么是BOM</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Window-对象"><span class="nav-number">2.</span> <span class="nav-text">Window 对象</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#window-的尺寸（浏览器的视图窗口，不包含工具栏和滚动条）"><span class="nav-number">3.</span> <span class="nav-text">window 的尺寸（浏览器的视图窗口，不包含工具栏和滚动条）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#window-screen-对象"><span class="nav-number">4.</span> <span class="nav-text">window.screen 对象</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Navigate对象"><span class="nav-number">5.</span> <span class="nav-text">Navigate对象</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#cookies"><span class="nav-number">6.</span> <span class="nav-text">cookies</span></a></li></ol></div>
+          
+        </div>
       </section>
       
     </div>
@@ -532,6 +805,10 @@
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
 
   
 

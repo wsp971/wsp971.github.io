@@ -64,7 +64,7 @@
 <link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="思考,技术," />
+  <meta name="keywords" content="javascript,面试,setInterval," />
 
 
 
@@ -80,16 +80,27 @@
 
 
 
-<meta name="description" content="做了差不多半年的“酱油”后台开发的管理，我又毅然决然的加入了开发大军，踏踏实实的做起了一枚前端程序员，是的，做程序员辛苦，但不操心，不必像之前那样，因为别的因素，心一直挂在半空中，分心乏术。">
+<meta name="description" content="前几日去面试了一次，其中有用到 setInterval  实现定时任务。大体的问法流程见下面对话：
+
+我： 这个功能可以用setInterval 实现。。 面试官： 可不可以用其他方法 我：可以用setTimeout 来实现 面试官： 怎么实现？ 我：递归啊。。巴拉巴拉。。。 面试官：这两个有什么区别？setTimeout的执行原理是什么？ 我：。。。胡说了半天。。算了承认吧 。臣妾说不上啊。。o">
 <meta property="og:type" content="article">
-<meta property="og:title" content="为什么我想要做全栈工程师">
-<meta property="og:url" content="http://wangshiping.net/2016/05/17/thinkInIT/index.html">
+<meta property="og:title" content="setInterval 与 setTimeout">
+<meta property="og:url" content="http://wangshiping.net/2016/08/18/setInterval/index.html">
 <meta property="og:site_name" content="王小王的小站">
-<meta property="og:description" content="做了差不多半年的“酱油”后台开发的管理，我又毅然决然的加入了开发大军，踏踏实实的做起了一枚前端程序员，是的，做程序员辛苦，但不操心，不必像之前那样，因为别的因素，心一直挂在半空中，分心乏术。">
-<meta property="og:updated_time" content="2016-05-22T02:48:28.531Z">
+<meta property="og:description" content="前几日去面试了一次，其中有用到 setInterval  实现定时任务。大体的问法流程见下面对话：
+
+我： 这个功能可以用setInterval 实现。。 面试官： 可不可以用其他方法 我：可以用setTimeout 来实现 面试官： 怎么实现？ 我：递归啊。。巴拉巴拉。。。 面试官：这两个有什么区别？setTimeout的执行原理是什么？ 我：。。。胡说了半天。。算了承认吧 。臣妾说不上啊。。o">
+<meta property="og:image" content="http://o6k660ytf.bkt.clouddn.com/interval1.png">
+<meta property="og:image" content="http://o6k660ytf.bkt.clouddn.com/interval2.png">
+<meta property="og:image" content="http://o6k660ytf.bkt.clouddn.com/interval3.png">
+<meta property="og:image" content="http://o6k660ytf.bkt.clouddn.com/interval4.png">
+<meta property="og:updated_time" content="2016-08-31T02:30:54.893Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="为什么我想要做全栈工程师">
-<meta name="twitter:description" content="做了差不多半年的“酱油”后台开发的管理，我又毅然决然的加入了开发大军，踏踏实实的做起了一枚前端程序员，是的，做程序员辛苦，但不操心，不必像之前那样，因为别的因素，心一直挂在半空中，分心乏术。">
+<meta name="twitter:title" content="setInterval 与 setTimeout">
+<meta name="twitter:description" content="前几日去面试了一次，其中有用到 setInterval  实现定时任务。大体的问法流程见下面对话：
+
+我： 这个功能可以用setInterval 实现。。 面试官： 可不可以用其他方法 我：可以用setTimeout 来实现 面试官： 怎么实现？ 我：递归啊。。巴拉巴拉。。。 面试官：这两个有什么区别？setTimeout的执行原理是什么？ 我：。。。胡说了半天。。算了承认吧 。臣妾说不上啊。。o">
+<meta name="twitter:image" content="http://o6k660ytf.bkt.clouddn.com/interval1.png">
 
 
 
@@ -107,7 +118,7 @@
   };
 </script>
 
-  <title> 为什么我想要做全栈工程师 | 王小王的小站 </title>
+  <title> setInterval 与 setTimeout | 王小王的小站 </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -293,7 +304,7 @@
             
             
               
-                为什么我想要做全栈工程师
+                setInterval 与 setTimeout
               
             
           </h1>
@@ -305,8 +316,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-05-17T00:41:50+08:00" content="2016-05-17">
-              2016-05-17
+            <time itemprop="dateCreated" datetime="2016-08-18T22:36:57+08:00" content="2016-08-18">
+              2016-08-18
             </time>
           </span>
 
@@ -326,6 +337,18 @@
 
                 
                 
+                  ， 
+                
+
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/技术/面试题/" itemprop="url" rel="index">
+                    <span itemprop="name">面试题</span>
+                  </a>
+                </span>
+
+                
+                
 
               
             </span>
@@ -335,8 +358,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2016/05/17/thinkInIT/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/05/17/thinkInIT/" itemprop="commentsCount"></span>
+                <a href="/2016/08/18/setInterval/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/08/18/setInterval/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -344,7 +367,7 @@
           <!-- 统计阅读量代码 -->
         <!--   
           &nbsp; | &nbsp;
-          <span id="/2016/05/17/thinkInIT/"class="leancloud_visitors" data-flag-title="为什么我想要做全栈工程师">
+          <span id="/2016/08/18/setInterval/"class="leancloud_visitors" data-flag-title="setInterval 与 setTimeout">
             &nbsp;阅读次数
           </span>
            -->
@@ -352,7 +375,7 @@
 
           
           
-             <span id="/2016/05/17/thinkInIT/" class="leancloud_visitors" data-flag-title="为什么我想要做全栈工程师">
+             <span id="/2016/08/18/setInterval/" class="leancloud_visitors" data-flag-title="setInterval 与 setTimeout">
                &nbsp; | &nbsp;
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -374,21 +397,106 @@
       
 
       
-        <p>做了差不多半年的“酱油”后台开发的管理，我又毅然决然的加入了开发大军，踏踏实实的做起了一枚前端程序员，是的，做程序员辛苦，但不操心，不必像之前那样，因为别的因素，心一直挂在半空中，分心乏术。</p>
-<a id="more"></a> 
-<p>做了一段时间的前端，又做了一段时间的后端，现在又开始做前端。做的项目都是前后端分离的项目。其实这也是现在主流，未来也将主流的模式。</p>
-<p>那么为什么要前后端分离呢？</p>
+        <p>前几日去面试了一次，其中有用到 <code>setInterval</code>  实现定时任务。大体的问法流程见下面对话：</p>
 <blockquote>
-<p>现在是互联网时代，项目都以用户体验至上，以前的前后端混合开发，或者说之前的后端开发兼职前端开发已经满足不了前端频繁的变化。于是讲前端独立出来，专业的事情交给专业的人去做。</p>
+<p>我： 这个功能可以用setInterval 实现。。<br> 面试官： 可不可以用其他方法<br> 我：可以用setTimeout 来实现<br> 面试官： 怎么实现？<br> 我：递归啊。。巴拉巴拉。。。<br> 面试官：这两个有什么区别？setTimeout的执行原理是什么？<br> 我：。。。胡说了半天。。算了承认吧 。臣妾说不上啊。。over!<br><a id="more"></a><br>好吧，我来查资料，总结一下。 </p>
 </blockquote>
-<p>前后端分离有什么好处呢？</p>
+<h2 id="setTimeout-和-setInterval-来自哪里？"><a href="#setTimeout-和-setInterval-来自哪里？" class="headerlink" title="setTimeout 和 setInterval 来自哪里？"></a>setTimeout 和 setInterval 来自哪里？</h2><p><code>setTimeout</code> 和<code>setInterval</code>  方法都是浏览器对象，即BOM提供的方法。这两个方法分别用来进行延时执行，和设置时间间隔执行代码。</p>
+<h2 id="setTimeout-与-setInterval-的用法"><a href="#setTimeout-与-setInterval-的用法" class="headerlink" title="setTimeout 与 setInterval 的用法"></a><code>setTimeout</code> 与 <code>setInterval</code> 的用法</h2><p>setTimeout用来对代码进行一个延时执行，定义为：</p>
+<pre><code>window.setTimeout(&quot;javascript function&quot;,milliseconds);
+</code></pre><p>两个参数，第一个是执行代码，第二个是延时的值，单位是毫秒，返回 一个值，可以 用 <code>clearTimeout</code> 取消定时，来几个例子：</p>
+<pre><code>//两秒后打印 hello world
+setTimeout(&quot;console.log(&apos;hello world&apos;)&quot;,2000);
+//两秒后弹出 hello world 提示框,匿名函数实现
+setTimeout(function(){alert(&quot;hello world&quot;)},3000);
+function sayHello(message){
+    alert(message);
+}
+// 调用已有函数
+setTimeout(&apos;sayHello(&quot;hello world&quot;)&apos;,2000);
+</code></pre><p>可以用 <code>clearTimeout</code> 来取消定时事件</p>
+<pre><code>取消定时事件
+var timer=setTimeout(&quot;alert(&apos;hello world&apos;)&quot;,5000);
+clearTimeout(timer);
+</code></pre><p>setInterval方法用来设定一个时间间隔来执行代码，其定义方式和setTimeout 方法类似。</p>
+<pre><code>window.setInterval(&apos;javascript function&apos;,milliseconds)
+</code></pre><p>同样，用个简单例子来演示一下用法：</p>
+<pre><code>var count=0;
+//设置定时，隔一秒递增一次
+setInterval(&apos;console.log(count++)&apos;,1000);
+//匿名函数形式
+setInterval(function(){console.log(count++);},1000);
+//调用已有函数形式
+function Count(count){
+    console.log(count);
+}
+setInterval(&apos;Count(count);count++&apos;,1000);
+</code></pre><p>可以用<code>clearInterval</code> 方法来</p>
+<h2 id="如何用setTimeout来模拟替代-setInterval-执行定时代码"><a href="#如何用setTimeout来模拟替代-setInterval-执行定时代码" class="headerlink" title="如何用setTimeout来模拟替代  `setInterval 执行定时代码"></a>如何用setTimeout来模拟替代  <code>`setInterval</code> 执行定时代码</h2><p>从定义来看，<code>setTimeout</code> 是要执行一段时间后的代码，setInterval 是 定时执行 一段代码，简单的思路，用<code>setTimeout</code>一段时间后执行代码后，再次用 setTimeout 递归调用下之前的代码，这样就实现了 <code>setInterval</code> 的功能。</p>
+<pre><code>var count=0;
+function Count(){
+    console.log(count++);
+}
+//setInterval 实现定时递增
+setInterval(&apos;Count()&apos;,1000);
+//setTimeout实现 定时递增
+(function A(){
+    Count();
+    setTimeout(A,1000);
+})();
+</code></pre><p>其实可以看到，用一个递归，就可以用<code>setTimeout</code> 来代替 <code>setInterval</code> 来实现其功能了。</p>
+<h3 id="setTimeout-与-setInterval-原理"><a href="#setTimeout-与-setInterval-原理" class="headerlink" title="setTimeout 与 setInterval 原理"></a><code>setTimeout</code> 与 <code>setInterval</code> 原理</h3><p>先看一段代码：</p>
+<pre><code>function test(){
+    setTimeout(&apos;alert(1)&apos;,0);
+    alert(2);
+}
+test();
+</code></pre><p>如果根据我们常规的理解，执行test函数时，应该先弹出1，再弹出2，因为setTimeout 的定时是0 ms,也就是立即执行的意思。可是结果是：先弹出2，再弹出1.</p>
 <blockquote>
-<p>前后端分离开发，可以让让前端专门负责页面渲染及表现处理，更加专注于客户体验；后端更加专注于业务功能的开发，不用为前端UI操心。</p>
+<p>这个结果给我们的感觉是:js是两个线程来分别执行的，即setTimeout 定时器 线程和常规代码块的执行线程，而这两个线程可能有什么优先级的区别。</p>
 </blockquote>
-<p>前后端分离有什么负面影响呢？</p>
-<blockquote>
-<p>最开始的分离可能是要一部分人在各自领域变得专业起来，然而剑走偏锋之后，前端不了解后端，后端不了解前端，对于系统的设计和开发来讲无疑是一件非常不好的事情。</p>
+<p>但我们看下下面这段代码：</p>
+<pre><code>setTimeout( function(){ while(true){} } , 100);
+setTimeout( function(){ alert(’你好!’); } , 200);
+</code></pre><blockquote>
+<p>这段代码的结果是：永远也不会弹出对话框。</p>
 </blockquote>
+<p>所以、这也能证明 js是单线程的运行在浏览器引擎中，只要上面代码没有执行完，下面代码是永远不会执行的。而实际上浏览器提供的两个计时函数，只是告诉浏览器，我要插入回调函数到待执行队列的时间点，而不是执行的时间点。而什么时候执行，则取决于当前执行队列是否空闲。具体的时间计算，setTimeout和setInterval还有点不一样的。 接下来说明一下。</p>
+<h4 id="setTimeout-和-setInterval-的区别"><a href="#setTimeout-和-setInterval-的区别" class="headerlink" title="setTimeout 和 setInterval 的区别"></a>setTimeout 和 setInterval 的区别</h4><p>我们先写下一段代码来模拟一下一段比较耗时的代码执行块：</p>
+<pre><code>var t0=new Date().getTime();
+function loop(){
+    var t1=new Date().getTime(),i=0;
+    console.log(&quot;start t1==&gt;&quot;+t1);
+    console.log(&quot;t1-t0=&quot;+(t1-t0));
+    for(;i&lt;1000000000;i++){};
+    var t2=new Date().getTime();
+    console.log(&quot;end t2=====&gt;&quot;+t2);
+    console.log(&quot;t2-t1=&quot;+(t2-t1));
+    console.log(&quot;t2-t0=&quot;+(t2-t0));
+    //setTimeout(&apos;loop()&apos;,500);
+}
+loop();
+</code></pre><p>运行这段代码、差不多loop()函数的执行时间为730 ms 左右(运行环境不同，可能会有差异)，如下图：</p>
+<img src="http://o6k660ytf.bkt.clouddn.com/interval1.png">
+<p>我们把这个<code>loop()</code>函数，分别设定为 setTimeout,和setInterval 的回调函数来比较一下：</p>
+<p><strong>setTimeout循环计时：</strong></p>
+<p>取消 <code>loop()</code> 函数的注释部分，再次执行一遍，结果如下图：</p>
+<img src="http://o6k660ytf.bkt.clouddn.com/interval2.png">
+<p>可以看到：</p>
+<p>每一次重新开始的t1-t0 都比上一次执行结束后 t1-t0 要延迟500毫秒，也就是说，计数器是在上一次执行回调结束后开始按照时间间隔(500 ms)进行下一次的回调计时。</p>
+<p><strong>setInterval 循环计时</strong></p>
+<pre><code>setInterval(&apos;loop()&apos;,500);
+</code></pre><p>执行以上代码，可以看到结果如下图：</p>
+<img src="http://o6k660ytf.bkt.clouddn.com/interval3.png">
+<p>可以看到现在的<code>for</code> 循环执行时间是大于我们设定的定时执行时间的。而运行结果显示，下一次的回调是在上一次回调结束后立即执行的、我们把<code>for</code> 循环减几个0, 让执行时间小于间隔时间500 ms 看看运行结果：</p>
+<img src="http://o6k660ytf.bkt.clouddn.com/interval4.png">
+<p>如上图，现在每次执行时间小于100ms，远小于定时间隔500ms, 可以看到每次下一次的的间隔 t1-t0 与上一次的t1-t0 之间的差值约为500ms 左右。</p>
+<p>所以对于setInterval 的 循环计时，我们可以得到下面的结论：</p>
+<p>当回调执行时间大于计时间隔时，回调的执行间隔为 执行时间。当回调的执行时间小于时间间隔时，回调的执行间隔为计时间隔。而事实上 ，代码在告诉浏览器 要在某个点插入回调代码时，即便回调没有执行完成，也会不停的去向浏览器引擎线程插入代码。这样也会不停的消耗浏览器内存，最后导致性能问题。</p>
+<h3 id="为什么要用setTimeout-来代替-setInterval-来计时："><a href="#为什么要用setTimeout-来代替-setInterval-来计时：" class="headerlink" title="为什么要用setTimeout  来代替 setInterval 来计时："></a>为什么要用setTimeout  来代替 setInterval 来计时：</h3><p>我们仔细想一想平常用到循环计时的需求，就是要隔一段时间来进行执行某段代码、而这个<strong>隔一段时间</strong> 的间隔是 从一次开始到下一次开始的时间、还是上一次结束到下一次开始的时间？显然我觉得，后一个应该是真正的时间间隔，因为平常我们忽略了，代码本身的执行时间（虽然很短），所以我们希望的总是：“每隔一段时间就重复一次操作”，而忽略了“重复的操作时花的时间”，所以我们设置的间隔时间一般都不是真正程序运行的间隔，当然程序执行时间很短时，我们看不出差别。而程序执行时间很长时，就发现结果并不是所想了。<br>另外，上一节也讲了，<code>setInterval</code> 在回调执行时间大于定时间隔时，会出现性能问题，故，用<code>setTimeout</code>  来模拟循环可以避免这样的性能问题。当然很多简单程序，用 <code>setInterval</code> 显然更加的通俗易懂。但必须注意的是，每个循环都要在不需要计时时，用提供的 <code>clearInterval</code> 和 <code>clearTimeout</code> 来取消计时。</p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>简单的总结了下 <code>setTimeout</code>  和 <code>setInterval</code> 的区别及相关用法及以下原理知识。关于setInterval 如何插入待执行队列的问题，网上查了资料，有两个说法：</p>
+<p>1、 一旦计时器时间到了，计时器就让浏览器引擎线程插入要执行的代码到 待执行队列。计时一次就插入一次。<br>2、计时器时间到了，计时器要检查待执行队列中有没有待执行的回调代码，如果有，跳过该时间点，等到下一次计时时再做相同的检查，如此循环。如果没有未执行代码，即可插入待执行队列。</p>
+<p>但显然如果是1、就有性能问题了。具体是怎样的、待性能分析篇再做讨论。</p>
 
       
     </div>
@@ -430,9 +538,11 @@
       
         <div class="post-tags">
           
-            <a href="/tags/思考/" rel="tag">#思考</a>
+            <a href="/tags/javascript/" rel="tag">#javascript</a>
           
-            <a href="/tags/技术/" rel="tag">#技术</a>
+            <a href="/tags/面试/" rel="tag">#面试</a>
+          
+            <a href="/tags/setInterval/" rel="tag">#setInterval</a>
           
         </div>
       
@@ -441,16 +551,16 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/05/17/choose/" rel="next" title="关于选择">
-                <i class="fa fa-chevron-left"></i> 关于选择
+              <a href="/2016/08/14/weizhong/" rel="next" title="面试题（微众银行）">
+                <i class="fa fa-chevron-left"></i> 面试题（微众银行）
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2016/05/22/markdown/" rel="prev" title="Markdown 语法总结">
-                Markdown 语法总结 <i class="fa fa-chevron-right"></i>
+              <a href="/2016/08/23/bom/" rel="prev" title="浏览器对象模型（browser Object model）">
+                浏览器对象模型（browser Object model） <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -477,8 +587,8 @@
           
 <div class="comments" id="comments">
   
-  <div class="ds-thread" data-thread-key="2016/05/17/thinkInIT/"
-           data-title="为什么我想要做全栈工程师" data-url="http://wangshiping.net/2016/05/17/thinkInIT/"></div>
+  <div class="ds-thread" data-thread-key="2016/08/18/setInterval/"
+           data-title="setInterval 与 setTimeout" data-url="http://wangshiping.net/2016/08/18/setInterval/"></div>
 
   <!-- 多说评论框 end -->
   <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
@@ -594,7 +704,7 @@
                 
               
               
-                <p class="post-toc-empty">此文章未包含目录</p>
+          <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#setTimeout-和-setInterval-来自哪里？"><span class="nav-number">1.</span> <span class="nav-text">setTimeout 和 setInterval 来自哪里？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#setTimeout-与-setInterval-的用法"><span class="nav-number">2.</span> <span class="nav-text">setTimeout 与 setInterval 的用法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#如何用setTimeout来模拟替代-setInterval-执行定时代码"><span class="nav-number">3.</span> <span class="nav-text">如何用setTimeout来模拟替代  `setInterval 执行定时代码</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#setTimeout-与-setInterval-原理"><span class="nav-number">3.1.</span> <span class="nav-text">setTimeout 与 setInterval 原理</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#setTimeout-和-setInterval-的区别"><span class="nav-number">3.1.1.</span> <span class="nav-text">setTimeout 和 setInterval 的区别</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#为什么要用setTimeout-来代替-setInterval-来计时："><span class="nav-number">3.2.</span> <span class="nav-text">为什么要用setTimeout  来代替 setInterval 来计时：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#总结"><span class="nav-number">3.3.</span> <span class="nav-text">总结</span></a></li></ol></li></ol></div>
           
         </div>
       </section>
