@@ -88,7 +88,7 @@
 <meta property="og:site_name" content="王小王的小站">
 <meta property="og:description" content="什么是BOM
 由于现代浏览器实现了javascript 交互方面的相同方法和属性，但浏览器对象没有正式标准">
-<meta property="og:updated_time" content="2016-09-01T09:29:30.380Z">
+<meta property="og:updated_time" content="2016-09-01T09:33:41.508Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="浏览器对象模型（browser Object model）">
 <meta name="twitter:description" content="什么是BOM
@@ -464,29 +464,14 @@ screen.availHeight //屏幕 可用高度
 </table>
 <h3 id="cookies"><a href="#cookies" class="headerlink" title="cookies"></a>cookies</h3><p>cookie 是存储于访问者计算机中的变量，当计算机通过浏览器请求某个页面时，就会附带着cookie过来到服务器。通过js 可以访问，并且设定cookie 的值，cookie在浏览器下是下挂在document对象下的属性。因为浏览器本身没有提供获取或者设置单个cookie的方法，故操作cookie都要写代码操作。一般用特定分隔符分割的字符串来代替。</p>
 <h4 id="cookie的属性"><a href="#cookie的属性" class="headerlink" title="cookie的属性"></a>cookie的属性</h4><p>cookie 的属性除了可以通过 <code>name/value</code> 设置外，还可以设置<strong>有效期</strong>，<strong>作用域</strong>，<strong>安全性</strong>等。 </p>
-<ul>
-<li>expires/max-age属性</li>
-</ul>
-<p>cookie的默认有效期很短暂，它只能持续在web浏览器的会话期间，一旦用户关闭浏览器，cookie保存的数据就丢失了。如果要延长，那么就通过设置expires属性，现在max-age属性已经替代了expires属性，max-age用秒来设置有效期。</p>
+<h5 id="expires-max-age属性"><a href="#expires-max-age属性" class="headerlink" title="expires/max-age属性"></a>expires/max-age属性</h5><p>cookie的默认有效期很短暂，它只能持续在web浏览器的会话期间，一旦用户关闭浏览器，cookie保存的数据就丢失了。如果要延长，那么就通过设置expires属性，现在max-age属性已经替代了expires属性，max-age用秒来设置有效期。</p>
 <p>max-age一般设置为正数，表示该cookie在max-age秒后自动失效，浏览器会将正数的cookie持久化。即写到对应的cookie文件中。无论关闭浏览器还是关闭电脑，cookie仍然有效；</p>
 <p>如果cookie为负值，则表示该cookie只在本浏览器窗口及本窗口打开的子窗口有效。关闭窗口后即失效。max-age为负数的cookie为临时性cookie,不会被持久化，不会被写入到cookie文件中。cookie的默认max-age为-1</p>
 <p>如果max-age设置为0，则表示删除该cookie。cookie机制没有提供删除cookie的方法。因此通过设置该cookie的值为0 来实现即时删除cookie的效果。失效的cookie会被浏览器从cookie文件或者内存中删除。</p>
-<ul>
-<li>domain属性</li>
-</ul>
-<p>domain属性可以使得多个web服务器共享cookie。domain属性的默认值是创建cookie的网页所在的服务器的主机名。不能将一个cookie的域设置成服务器所在的域之外的域。<br>例如，让位于a.wsp.com的服务器能够读到b.wsp.com的设置的cookie的值，如果b.wsp.com的页面创建的cookie的path属性设置为<strong>/</strong> ，把domain属性设置成<strong>.wsp.com</strong>,那么所有位于b.wsp.com的网页和所有a.wsp.com的网页以及wsp.com域的其他服务器上的网页都可以访问这个cookie。</p>
-<ul>
-<li>path属性</li>
-</ul>
-<p>path指定与cookie关联在一起的网页，在默认情况下，<strong>cookie与创建它的网页有关，并对该网页和该网页同目录后者子目录的其他web页面有关</strong><br>，比如： <a href="http://wangshiping.net/categories/a.html">http://wangshiping.net/categories/a.html</a> 下创建的cookie 在 <a href="http://wangshiping.net/categories/b.html">http://wangshiping.net/categories/b.html</a> 下可以访问，但是在 <a href="http://wangshiping.net/guitar/index.html">http://wangshiping.net/guitar/index.html</a> 下是不可以访问的。如果要设置可访问，则要设置path。例如：<br><a href="http://wangshiping.net/categories/test/a.html">http://wangshiping.net/categories/test/a.html</a> 下设置的cookie 要在 <a href="http://wangshiping.net/categories/b.html">http://wangshiping.net/categories/b.html</a> 下可以访问。那么就要设置cookie的path为<strong>/categories</strong>。当然，如果要设置站点下的所有cookie都可以互相访问，则设置path 为：<strong>/</strong> 即可。将cookie 的path设定为“/”,即 cookie 拥有了和localstorage 相同的作用域。它在该站定请求的任何一个页面都会上送该cookie。</p>
-<ul>
-<li>secure属性</li>
-</ul>
-<p>secure属性是一个布尔值，用来制定如何在网络上传输cookie，cookie默认是以不安全的形式（普通的 HTTP 链接）传递的。而一旦cookie被标识为 “安全的”，那就只能浏览器和服务器通过https或者其他安全协议连接的时候才能够传递它。</p>
-<ul>
-<li>httpOnly属性</li>
-</ul>
-<p>httpOnly 属性限制了cookie 对HTTP请求的作用范围。特别的。该属性指示用户代理忽略那些通过非“HTTP”方式对cookie的访问（比如浏览器暴露给js的接口）。注意：httpOnly属性和Secure 属性相互独立。</p>
+<h5 id="domain属性"><a href="#domain属性" class="headerlink" title="domain属性"></a>domain属性</h5><p>domain属性可以使得多个web服务器共享cookie。domain属性的默认值是创建cookie的网页所在的服务器的主机名。不能将一个cookie的域设置成服务器所在的域之外的域。<br>例如，让位于a.wsp.com的服务器能够读到b.wsp.com的设置的cookie的值，如果b.wsp.com的页面创建的cookie的path属性设置为<strong>/</strong> ，把domain属性设置成<strong>.wsp.com</strong>,那么所有位于b.wsp.com的网页和所有a.wsp.com的网页以及wsp.com域的其他服务器上的网页都可以访问这个cookie。</p>
+<h5 id="path属性"><a href="#path属性" class="headerlink" title="path属性"></a>path属性</h5><p>path指定与cookie关联在一起的网页，在默认情况下，<strong>cookie与创建它的网页有关，并对该网页和该网页同目录后者子目录的其他web页面有关</strong><br>，比如： <a href="http://wangshiping.net/categories/a.html">http://wangshiping.net/categories/a.html</a> 下创建的cookie 在 <a href="http://wangshiping.net/categories/b.html">http://wangshiping.net/categories/b.html</a> 下可以访问，但是在 <a href="http://wangshiping.net/guitar/index.html">http://wangshiping.net/guitar/index.html</a> 下是不可以访问的。如果要设置可访问，则要设置path。例如：<br><a href="http://wangshiping.net/categories/test/a.html">http://wangshiping.net/categories/test/a.html</a> 下设置的cookie 要在 <a href="http://wangshiping.net/categories/b.html">http://wangshiping.net/categories/b.html</a> 下可以访问。那么就要设置cookie的path为<strong>/categories</strong>。当然，如果要设置站点下的所有cookie都可以互相访问，则设置path 为：<strong>/</strong> 即可。将cookie 的path设定为“/”,即 cookie 拥有了和localstorage 相同的作用域。它在该站定请求的任何一个页面都会上送该cookie。</p>
+<h5 id="secure属性"><a href="#secure属性" class="headerlink" title="secure属性"></a>secure属性</h5><p>secure属性是一个布尔值，用来制定如何在网络上传输cookie，cookie默认是以不安全的形式（普通的 HTTP 链接）传递的。而一旦cookie被标识为 “安全的”，那就只能浏览器和服务器通过https或者其他安全协议连接的时候才能够传递它。</p>
+<h5 id="httpOnly属性"><a href="#httpOnly属性" class="headerlink" title="httpOnly属性"></a>httpOnly属性</h5><p>httpOnly 属性限制了cookie 对HTTP请求的作用范围。特别的。该属性指示用户代理忽略那些通过非“HTTP”方式对cookie的访问（比如浏览器暴露给js的接口）。注意：httpOnly属性和Secure 属性相互独立。</p>
 <h4 id="cookie的编码及解码"><a href="#cookie的编码及解码" class="headerlink" title="cookie的编码及解码"></a>cookie的编码及解码</h4><p>由于cookie的键值对不用需包含分号，逗号和空格符，任何被存储为cookie的值都应该被编码，前端一般用 encodeURIComponent 编码 和 decodeURIComponent 解码。</p>
 <h4 id="同名的cookie"><a href="#同名的cookie" class="headerlink" title="同名的cookie"></a>同名的cookie</h4><p>同名的cookie,不同的domain,或不同 path 属于不同的cookie； 同名的cookie,相同的domain,相同的path,属于同一个cookie</p>
 <h4 id="cookie的局限性"><a href="#cookie的局限性" class="headerlink" title="cookie的局限性"></a>cookie的局限性</h4><p>前面说了浏览器在发送请求时，会自动发送cookie,所以cookie的存储不能太大，而且RFC 2956 标准不用需浏览器保存超过300个 cookie,为每个web服务器保存的cookie数不能超过20个，而且每个cookie保存的数据不超过4kb;当然现在有浏览器的允许cookie的总数超过300个。总之现在不建议cookie作为客户端存储的方案。现在可有的客户端存储方案有 html5的localStroage 和 ie的 userData 等。</p>
@@ -774,7 +759,7 @@ console.log(document.cookie);
                 
               
               
-          <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#什么是BOM"><span class="nav-number">1.</span> <span class="nav-text">什么是BOM</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Window-对象"><span class="nav-number">2.</span> <span class="nav-text">Window 对象</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#window-的尺寸（浏览器的视图窗口，不包含工具栏和滚动条）"><span class="nav-number">3.</span> <span class="nav-text">window 的尺寸（浏览器的视图窗口，不包含工具栏和滚动条）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#window-screen-对象"><span class="nav-number">4.</span> <span class="nav-text">window.screen 对象</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Navigate对象"><span class="nav-number">5.</span> <span class="nav-text">Navigate对象</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#cookies"><span class="nav-number">6.</span> <span class="nav-text">cookies</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#cookie的属性"><span class="nav-number">6.1.</span> <span class="nav-text">cookie的属性</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#cookie的编码及解码"><span class="nav-number">6.2.</span> <span class="nav-text">cookie的编码及解码</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#同名的cookie"><span class="nav-number">6.3.</span> <span class="nav-text">同名的cookie</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#cookie的局限性"><span class="nav-number">6.4.</span> <span class="nav-text">cookie的局限性</span></a></li></ol></li></ol></div>
+          <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#什么是BOM"><span class="nav-number">1.</span> <span class="nav-text">什么是BOM</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Window-对象"><span class="nav-number">2.</span> <span class="nav-text">Window 对象</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#window-的尺寸（浏览器的视图窗口，不包含工具栏和滚动条）"><span class="nav-number">3.</span> <span class="nav-text">window 的尺寸（浏览器的视图窗口，不包含工具栏和滚动条）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#window-screen-对象"><span class="nav-number">4.</span> <span class="nav-text">window.screen 对象</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Navigate对象"><span class="nav-number">5.</span> <span class="nav-text">Navigate对象</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#cookies"><span class="nav-number">6.</span> <span class="nav-text">cookies</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#cookie的属性"><span class="nav-number">6.1.</span> <span class="nav-text">cookie的属性</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#expires-max-age属性"><span class="nav-number">6.1.1.</span> <span class="nav-text">expires/max-age属性</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#domain属性"><span class="nav-number">6.1.2.</span> <span class="nav-text">domain属性</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#path属性"><span class="nav-number">6.1.3.</span> <span class="nav-text">path属性</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#secure属性"><span class="nav-number">6.1.4.</span> <span class="nav-text">secure属性</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#httpOnly属性"><span class="nav-number">6.1.5.</span> <span class="nav-text">httpOnly属性</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#cookie的编码及解码"><span class="nav-number">6.2.</span> <span class="nav-text">cookie的编码及解码</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#同名的cookie"><span class="nav-number">6.3.</span> <span class="nav-text">同名的cookie</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#cookie的局限性"><span class="nav-number">6.4.</span> <span class="nav-text">cookie的局限性</span></a></li></ol></li></ol></div>
           
         </div>
       </section>
