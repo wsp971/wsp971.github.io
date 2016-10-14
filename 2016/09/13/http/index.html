@@ -1,0 +1,997 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="javascript,http," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="浏览器请求某个资源所需要的几个步骤：1、浏览器搜索自身的DNS缓存，chrome浏览器下可以在chrome://net-internals/dns 查看
+2、搜索操作系统自身的DNS缓存（浏览器没有找到缓存，或者浏览器缓存已经失效）
+3、读取本地host文件
+4、浏览器发起一个DNS的系统调用">
+<meta property="og:type" content="article">
+<meta property="og:title" content="http相关">
+<meta property="og:url" content="http://wangshiping.net/2016/09/13/http/index.html">
+<meta property="og:site_name" content="王小王的小站">
+<meta property="og:description" content="浏览器请求某个资源所需要的几个步骤：1、浏览器搜索自身的DNS缓存，chrome浏览器下可以在chrome://net-internals/dns 查看
+2、搜索操作系统自身的DNS缓存（浏览器没有找到缓存，或者浏览器缓存已经失效）
+3、读取本地host文件
+4、浏览器发起一个DNS的系统调用">
+<meta property="og:image" content="http://o6k660ytf.bkt.clouddn.com/image/tcp.jpg">
+<meta property="og:updated_time" content="2016-10-14T01:10:19.821Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="http相关">
+<meta name="twitter:description" content="浏览器请求某个资源所需要的几个步骤：1、浏览器搜索自身的DNS缓存，chrome浏览器下可以在chrome://net-internals/dns 查看
+2、搜索操作系统自身的DNS缓存（浏览器没有找到缓存，或者浏览器缓存已经失效）
+3、读取本地host文件
+4、浏览器发起一个DNS的系统调用">
+<meta name="twitter:image" content="http://o6k660ytf.bkt.clouddn.com/image/tcp.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"right","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+  <title> http相关 | 王小王的小站 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?7baaef084620042980c0777b359da41b";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+  <script type="text/javascript">
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//tajs.qq.com/stats?sId=56055856";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-right page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"> <i></i>
+      </span>
+      <span class="site-title">王小王的小站</span>
+      <span class="logo-line-after"> <i></i>
+      </span>
+    </a>
+  </div>
+  <p class="site-subtitle">蒹葭苍苍忆佳人</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+  <ul id="menu" class="menu">
+    
+        
+    <li class="menu-item menu-item-home">
+      <a href="/" rel="section">
+        
+        <i class="menu-item-icon fa fa-home fa-fw"></i>
+        <br />
+        
+        首页
+      </a>
+    </li>
+    
+        
+    <li class="menu-item menu-item-categories">
+      <a href="/categories" rel="section">
+        
+        <i class="menu-item-icon fa fa-th fa-fw"></i>
+        <br />
+        
+        分类
+      </a>
+    </li>
+    
+        
+    <li class="menu-item menu-item-about">
+      <a href="/about" rel="section">
+        
+        <i class="menu-item-icon fa fa-user fa-fw"></i>
+        <br />
+        
+        关于
+      </a>
+    </li>
+    
+        
+    <li class="menu-item menu-item-archives">
+      <a href="/archives" rel="section">
+        
+        <i class="menu-item-icon fa fa-archive fa-fw"></i>
+        <br />
+        
+        归档
+      </a>
+    </li>
+    
+        
+    <li class="menu-item menu-item-tags">
+      <a href="/tags" rel="section">
+        
+        <i class="menu-item-icon fa fa-tags fa-fw"></i>
+        <br />
+        
+        标签
+      </a>
+    </li>
+    
+        
+    <li class="menu-item menu-item-guitar">
+      <a href="/guitar" rel="section">
+        
+        <i class="menu-item-icon fa fa-music fa-fw"></i>
+        <br />
+        
+        吉他
+      </a>
+    </li>
+    
+        
+    <li class="menu-item menu-item-message">
+      <a href="/MessageBoard" rel="section">
+        
+        <i class="menu-item-icon fa fa-comments fa-fw"></i>
+        <br />
+        
+        留言板
+      </a>
+    </li>
+    
+
+      
+    </ul>
+    
+
+  
+  </nav> </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                http相关
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-09-13T20:44:14+08:00" content="2016-09-13">
+              2016-09-13
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/技术/" itemprop="url" rel="index">
+                    <span itemprop="name">技术</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/09/13/http/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/09/13/http/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+          <!-- 统计阅读量代码 -->
+        <!--   
+          &nbsp; | &nbsp;
+          <span id="/2016/09/13/http/"class="leancloud_visitors" data-flag-title="http相关">
+            &nbsp;阅读次数
+          </span>
+           -->
+          
+
+          
+          
+             <span id="/2016/09/13/http/" class="leancloud_visitors" data-flag-title="http相关">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="浏览器请求某个资源所需要的几个步骤："><a href="#浏览器请求某个资源所需要的几个步骤：" class="headerlink" title="浏览器请求某个资源所需要的几个步骤："></a>浏览器请求某个资源所需要的几个步骤：</h1><p>1、浏览器搜索自身的DNS缓存，chrome浏览器下可以在<code>chrome://net-internals/dns</code> 查看</p>
+<p>2、搜索操作系统自身的DNS缓存（浏览器没有找到缓存，或者浏览器缓存已经失效）</p>
+<p>3、读取本地host文件</p>
+<p>4、浏览器发起一个DNS的系统调用<br><a id="more"></a><br> 4.1 宽带运营商服务器查看本身缓存<br> 4.2 运营商服务器发起一个迭代的DNS解析请求<br> 4.3 运营商服务器把结果返回操作系统内核同时缓存起来<br> 4.3 操作系统内核把结果返回浏览器</p>
+<p>5.最终浏览器拿到了域名对应的ip地址</p>
+<p>6.浏览器开始于服务器端的TCP三次进行握手请求</p>
+<p>TCP/IP 链接建立起来后 浏览器就可以向服务器端发送HTTP请求了</p>
+<p>服务器端接受请求，经过后端处理，返回相关信息给到浏览器</p>
+<p>关闭链接，浏览器根据所请求得到的资源做渲染执行操作</p>
+<h1 id="http-的响应状态码"><a href="#http-的响应状态码" class="headerlink" title="http 的响应状态码"></a>http 的响应状态码</h1><p>Http状态码分为5类，大体有个表如下：</p>
+<table>
+<thead>
+<tr>
+<th>总体范围</th>
+<th>已定义范围</th>
+<th>类别</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>100~199</td>
+<td>100~101</td>
+<td>信息</td>
+</tr>
+<tr>
+<td>100~299</td>
+<td>200~206</td>
+<td>成功</td>
+</tr>
+<tr>
+<td>300~399</td>
+<td>300~305</td>
+<td>重定向</td>
+</tr>
+<tr>
+<td>400~499</td>
+<td>400~415</td>
+<td>客户端错误</td>
+</tr>
+<tr>
+<td>500~599</td>
+<td>500~505</td>
+<td>服务器错误</td>
+</tr>
+</tbody>
+</table>
+<p>再来个常见状态码的说明：</p>
+<table>
+<thead>
+<tr>
+<th>状态码</th>
+<th>原因短语</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>200</td>
+<td>OK</td>
+<td>服务器已经创建成功请求</td>
+</tr>
+<tr>
+<td>201</td>
+<td>created</td>
+<td>资源已经创建完毕</td>
+</tr>
+<tr>
+<td>301</td>
+<td>move Permanently</td>
+<td>请求的URL已经移走</td>
+</tr>
+<tr>
+<td>304</td>
+<td>Not Modified</td>
+<td>资源未发生过变化</td>
+</tr>
+<tr>
+<td>305</td>
+<td>Use Proxy</td>
+<td>必须通过代理访问资源</td>
+</tr>
+<tr>
+<td>400</td>
+<td>Bad request</td>
+<td>告诉客户端他发送了一条异常请求</td>
+</tr>
+<tr>
+<td>401</td>
+<td>Unauthorized</td>
+<td>未授权，待认证</td>
+</tr>
+<tr>
+<td>403</td>
+<td>Forbidden</td>
+<td>服务器拒绝了请求</td>
+</tr>
+<tr>
+<td>404</td>
+<td>Not Found</td>
+<td>未找到</td>
+</tr>
+<tr>
+<td>500</td>
+<td>Internal Server Error</td>
+<td>服务器内部错误，使其无法提供服务</td>
+</tr>
+<tr>
+<td>502</td>
+<td>Bad gateway</td>
+<td>网管故障</td>
+</tr>
+<tr>
+<td>503</td>
+<td>service Unavailable</td>
+<td>未提供此服务</td>
+</tr>
+</tbody>
+</table>
+<p>#TCP/Ip 的三次握手</p>
+<p>我们知道http协议是基于 tcp/ip 协议之上的 应用层协议。每个http 请求在发送前都将遵循TCP/ip协议的三次握手链接之后，才可以发送数据。那么TCP/ip协议的三次握手是怎么样的呢？</p>
+<img src="http://o6k660ytf.bkt.clouddn.com/image/tcp.jpg">
+<p>第一次握手：客户端发送syn包(syn=j)服务器，并进入SYN_SEND状态，等待服务器确认；</p>
+<p>第二次握手：服务器收到syn包，必须确认客户的SYN（ack=j+1），同时自己也发送一个SYN包（syn=k），即SYN+ACK包，此时服务器进入SYN_RECV状态；</p>
+<p>第三次握手：客户端收到服务器的SYN＋ACK包，向服务器发送确认包ACK(ack=k+1)，此包发送完毕，客户端和服务器进入ESTABLISHED状态，完成三次握手。</p>
+
+      
+    </div>
+    
+    <div>
+      
+        
+      
+    </div>
+
+    <div>
+      
+        
+<div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center">
+  <div>生活窘迫，来了就赏点吧~~</div>
+  <button id="rewardButton", disable="enable", onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}", style="cursor: pointer; border: 0; outline: 0; border-radius: 100%; padding: 0; margin: 0; letter-spacing: normal; text-transform: none; text-indent: 0px; text-shadow: none">
+    <span onmouseover="this.style.color='rgb(236,96,0)';this.style.background='rgb(204,204,204)'" onMouseOut="this.style.color='#fff';this.style.background='rgb(236,96,0)'" style="display: inline-block; width: 70px; height: 70px; border-radius: 100%; line-height: 81px; color: #fff; font: 400 35px/75px 'microsofty'; background: rgb(236,96,0)">赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="http://o6k660ytf.bkt.clouddn.com//pay/weixinpay.jpg" alt="王小王sean WeChat Pay" style="width: 200px; max-width: 100%; display: inline-block"/>
+        <p>微信打赏</p>
+      </div>
+    
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="http://o6k660ytf.bkt.clouddn.com//pay/alipay.jpg" alt="王小王sean Alipay" style="width: 200px; max-width: 100%; display: inline-block"/>
+        <p>支付宝打赏</p>
+      </div>
+    
+  </div>
+</div>
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/javascript/" rel="tag">#javascript</a>
+          
+            <a href="/tags/http/" rel="tag">#http</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/09/12/common/" rel="next" title="commons 规范 、AMD、CMD">
+                <i class="fa fa-chevron-left"></i> commons 规范 、AMD、CMD
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/10/12/jieliu/" rel="prev" title="javascript节流函数的使用">
+                javascript节流函数的使用 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+<div class="comments" id="comments">
+  
+  <div class="ds-thread" data-thread-key="2016/09/13/http/"
+           data-title="http相关" data-url="http://wangshiping.net/2016/09/13/http/"></div>
+
+  <!-- 多说评论框 end -->
+  <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+  <script type="text/javascript">  
+     var duoshuoQuery = {short_name:"wangshiping"};  
+      (function() {  
+        var ds = document.createElement('script');  
+        ds.type = 'text/javascript';ds.async = true;  
+        ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';  
+        ds.charset = 'UTF-8';  
+        (document.getElementsByTagName('head')[0]   
+         || document.getElementsByTagName('body')[0]).appendChild(ds);  
+      })();  
+  </script>
+  
+</div>
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+      
+
+        
+          <ul class="sidebar-nav motion-element">
+            <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >文章目录</li>
+            <li class="sidebar-nav-overview" data-target="site-overview">站点概览</li>
+          </ul>
+        
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+                 src="/images/default_avatar.jpg"
+                 alt="王小王sean" />
+          <p class="site-author-name" itemprop="name">王小王sean</p>
+          <p class="site-description motion-element" itemprop="description">自由，该向何处。</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">22</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+          
+          <div class="site-state-item site-state-categories">
+            
+            <a href="/categories">
+              
+              <span class="site-state-item-count">3</span>
+              <span class="site-state-item-name">分类</span>
+              
+            </a>
+            
+          </div>
+          
+
+            
+          <div class="site-state-item site-state-tags">
+            
+            <a href="/tags">
+              
+              <span class="site-state-item-count">29</span>
+              <span class="site-state-item-name">标签</span>
+              
+            </a>
+            
+          </div>
+          
+        </nav>
+        
+        <div class="links-of-author motion-element">
+          
+              
+          <span class="links-of-author-item">
+            <a href="http://weibo.com/u/5815414913?is_all=1" target="_blank" title="Weibo">
+               <i class="fa fa-weibo"></i>
+              
+                    Weibo
+            </a>
+          </span>
+          
+          <span class="links-of-author-item">
+            <a href="https://github.com/wsp971/" target="_blank" title="GitHub">
+               <i class="fa fa-github"></i>
+              
+                    GitHub
+            </a>
+          </span>
+          
+            
+        </div>
+        
+          
+
+          
+          
+      </section>
+      
+      <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+        <div class="post-toc">
+          
+                
+              
+              
+          <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#浏览器请求某个资源所需要的几个步骤："><span class="nav-number">1.</span> <span class="nav-text">浏览器请求某个资源所需要的几个步骤：</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#http-的响应状态码"><span class="nav-number">2.</span> <span class="nav-text">http 的响应状态码</span></a></li></ol></div>
+          
+        </div>
+      </section>
+      
+    </div>
+
+
+  </aside>
+  <!-- 音乐模块开始 -->
+ <aside id="musicbar" class="sidebar" style="margin-top: 10px; display: block;"> 
+    <div class="sidebar-inner" style="padding:0px;">
+      <section class="site-overview sidebar-panel  sidebar-panel-active ">
+        
+        
+          
+            
+               <p style="padding-left:5px;margin:0px;"><i class="menu-item-icon fa fa-music fa-fw"></i>音乐盒</p>
+               <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=280 height=52 src="http://music.163.com/outchain/player?type=1&id=14947&auto=1&height=32"></iframe>
+            
+        
+      </section>
+    </div>
+  </aside>
+ 
+
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+<div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">王小王sean</span>
+</div>
+<span id="busuanzi_container_site_pv">
+    本站总访问量<span id="busuanzi_value_site_pv"></span>次
+</span>
+<span id="busuanzi_container_site_uv">
+  本站访客数<span id="busuanzi_value_site_uv"></span>人次
+</span>
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"wangshiping"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+      
+      <script src="/vendors/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+      <script src="/js/src/hook-duoshuo.js"></script>
+    
+  
+
+
+
+
+
+  
+  
+  
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("Ypm2bpziM6K8MQzeCOwOIsh5-gzGzoHsz", "C2onfFr7kBaAxb3SYKJsww8P");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+<script type="text/javascript" async src="//push.zhanzhang.baidu.com/push.js">
+</script>
+
+
+</body>
+</html>
